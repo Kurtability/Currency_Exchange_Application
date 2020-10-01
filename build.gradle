@@ -63,8 +63,12 @@ test {
     useJUnitPlatform()
 }
 
-task getHomeDir {
-    doLast {
-        println gradle.gradleHomeDir
+jar {
+    manifest {
+        attributes "Main-Class": "CurrencyExchange.App"
+    }
+ 
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
