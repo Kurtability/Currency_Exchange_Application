@@ -49,3 +49,6 @@ gradle-app.setting
 
 # VSCode
 .vscode/
+
+# IDEA
+.idea/
