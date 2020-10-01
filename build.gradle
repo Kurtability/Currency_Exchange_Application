@@ -20,6 +20,7 @@ buildscript {
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'jacoco'
 
 // plugins {
 //     // Apply the java plugin to add support for Java
@@ -61,14 +62,22 @@ javafx {
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+    test.finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports { 
+        html.enabled = true 
+        csv.enabled = true 
+    }
 }
 
 jar {
     manifest {
-        attributes "Main-Class": "CurrencyExchange.App"
+        attributes "Main-Class": "$mainClassName"
     }
  
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
