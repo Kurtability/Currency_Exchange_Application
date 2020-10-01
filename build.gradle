@@ -5,19 +5,32 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.3/userguide/tutorial_java_projects.html
  */
-
-plugins {
-    // Apply the java plugin to add support for Java
-    id 'java'
-
-    // Apply the application plugin to add support for building a CLI application.
-    id 'application'
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'org.openjfx:javafx-plugin:0.0.9'
+    }
 }
+apply plugin: 'org.openjfx.javafxplugin'
+apply plugin: 'java'
+apply plugin: 'application'
+
+// plugins {
+//     // Apply the java plugin to add support for Java
+//     id 'java'
+
+//     // Apply the application plugin to add support for building a CLI application.
+//     id 'application'
+// }
 
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -29,6 +42,8 @@ dependencies {
 
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+
+
 }
 
 application {
@@ -36,7 +51,18 @@ application {
     mainClassName = 'CurrencyExchange.App'
 }
 
+javafx {
+    version = '14'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+}
+
+task getHomeDir {
+    doLast {
+        println gradle.gradleHomeDir
+    }
 }
