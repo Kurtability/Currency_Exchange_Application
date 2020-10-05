@@ -8,23 +8,25 @@ public class FileHandler {
      */
     public static String find(String currency) {
         String result = null;
-        String line = null;
-        boolean found = false;
-        Scanner currencies = null;
+        if(currency != null && !currency.isEmpty()) {
+            String line = null;
+            boolean found = false;
+            Scanner currencies = null;
 
-        try{
-            currencies = new Scanner(new FileInputStream("currencies.txt"));
-        }
-        catch(FileNotFoundException e) {
-            System.out.println("currencies.txt not found or could not be opened.");
-            System.exit(1);
-        }
+            try{
+                currencies = new Scanner(new FileInputStream("currencies.txt"));
+            }
+            catch(FileNotFoundException e) {
+                System.out.println("currencies.txt not found or could not be opened.");
+                System.exit(1);
+            }
 
-        while(currencies.hasNextLine() && !found) {
-            line = currencies.nextLine();
-            if(line.contains(currency)) {
-                found = true;
-                result = line;
+            while(currencies.hasNextLine() && !found) {
+                line = currencies.nextLine();
+                if(line.contains(currency)) {
+                    found = true;
+                    result = line;
+                }
             }
         }
 
