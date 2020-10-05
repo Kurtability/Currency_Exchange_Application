@@ -22,7 +22,7 @@ public class FileHandler {
 
         while(currencies.hasNextLine() && !found) {
             line = currencies.nextLine();
-            if(line.contains(currency)) {
+            if(line.contains(currency.toUpperCase())) {
                 found = true;
                 result = line;
             }
