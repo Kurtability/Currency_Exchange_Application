@@ -44,7 +44,8 @@ public class FileHandler {
         writer.println(String.join(",", currency, Float.toString(value)));
         writer.close();
     }
-
+    
+    // remove a currency from the database
     public static void remove(String currency) {
 
 
