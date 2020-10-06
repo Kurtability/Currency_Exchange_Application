@@ -1,5 +1,6 @@
 package CurrencyExchange;
 
+import CurrencyExchange.UIComponents.Header;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 public class ConvertScene {
 
@@ -27,18 +28,11 @@ public class ConvertScene {
 
     private static void initScene() {
 
-        Label label = new Label("Currency Converter");
-        label.setStyle("-fx-font-size: 2em; -fx-background-color: #8AE4EB; -fx-background-radius: 10px; -fx-padding: 2em;  -fx-text-fill: #5F634F");
-        StackPane header = new StackPane(label);
-        header.setStyle("-fx-background-color: #8AE4EB; -fx-padding: 12px; -fx-background-radius:0 0 25px 25px;");
-        header.setAlignment(Pos.TOP_CENTER);
-
         GridPane layout = new GridPane();
         layout.setPadding(new Insets(10));
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(20);
         layout.setHgap(15);
-        GridPane.setConstraints(label, 0, 0);
 
         Label lFrom = new Label("Select currency to convert from:");
         lFrom.setStyle("-fx-font-size: 1.25em; -fx-text-fill: #5F634F");
@@ -75,10 +69,11 @@ public class ConvertScene {
         layout.getChildren().addAll(cbFromCurrencies, tfFromAmount, lFrom, lTo, cbToCurrencies);
 
         BorderPane root = new BorderPane();
-        root.setTop(header);
+        root.setTop(Header.getHeader());
         root.setCenter(layout);
-        root.setStyle("-fx-background-color: #99C24D");
+        root.setStyle("-fx-background-color: #99C24D; -fx-background-radius: 0 0 20 20");
         convertScene = new Scene(root, 640, 480);
+        convertScene.setFill(Color.TRANSPARENT);
     }
     
 }

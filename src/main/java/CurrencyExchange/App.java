@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class App extends Application {
 
@@ -15,7 +16,9 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setMinHeight(350);
         primaryStage.setMinWidth(350);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Currency XChange");
+
 
         Button btn = new Button();
         btn.setText("Go to page");
