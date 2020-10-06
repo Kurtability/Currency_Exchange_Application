@@ -23,7 +23,7 @@ public class FileHandler {
 
             while(currencies.hasNextLine() && !found) {
                 line = currencies.nextLine();
-                if(line.contains(currency)) {
+                if(line.contains(currency.toUpperCase())) {
                     found = true;
                     result = line;
                 }
@@ -62,7 +62,7 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            writer.print(System.lineSeparator() + String.join(",", currency, Float.toString(value)));
+            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Float.toString(value)));
             writer.close();
         }
     }
