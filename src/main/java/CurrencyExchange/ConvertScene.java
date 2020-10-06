@@ -40,15 +40,15 @@ public class ConvertScene {
         layout.setHgap(15);
         GridPane.setConstraints(label, 0, 0);
 
-        Label lFrom = new Label("Select from currency:");
+        Label lFrom = new Label("Select currency to convert from:");
         lFrom.setStyle("-fx-font-size: 1.25em; -fx-text-fill: #5F634F");
         GridPane.setConstraints(lFrom, 0, 0);
 
-        ChoiceBox<String> cbCurrencies = new ChoiceBox<String>();
-        cbCurrencies.getItems().addAll("USD", "AUD", "SGD");
-        cbCurrencies.setItems(FXCollections.observableArrayList("USD", "AUD", "SGD"));
-        cbCurrencies.setTooltip(new Tooltip("Select the currency to convert from"));
-        GridPane.setConstraints(cbCurrencies, 0, 1);
+        ChoiceBox<String> cbFromCurrencies = new ChoiceBox<String>();
+        cbFromCurrencies.getItems().addAll("USD", "AUD", "SGD");
+        cbFromCurrencies.setItems(FXCollections.observableArrayList("USD", "AUD", "SGD"));
+        cbFromCurrencies.setTooltip(new Tooltip("Select the currency to convert from"));
+        GridPane.setConstraints(cbFromCurrencies, 0, 1);
 
         TextField tfFromAmount = new TextField();
         tfFromAmount.textProperty()
@@ -62,7 +62,17 @@ public class ConvertScene {
         tfFromAmount.setPromptText("From amount");
         GridPane.setConstraints(tfFromAmount, 2, 1);
 
-        layout.getChildren().addAll(cbCurrencies, tfFromAmount, lFrom);
+        Label lTo = new Label("Select currency to convert to:");
+        lTo.setStyle("-fx-font-size: 1.25em; -fx-text-fill: #5F634F");
+        GridPane.setConstraints(lTo, 0, 3);
+
+        ChoiceBox<String> cbToCurrencies = new ChoiceBox<String>();
+        cbToCurrencies.getItems().addAll("USD", "AUD", "SGD");
+        cbToCurrencies.setItems(FXCollections.observableArrayList("USD", "AUD", "SGD"));
+        cbToCurrencies.setTooltip(new Tooltip("Select the currency to convert to"));
+        GridPane.setConstraints(cbToCurrencies, 0, 4);
+
+        layout.getChildren().addAll(cbFromCurrencies, tfFromAmount, lFrom, lTo, cbToCurrencies);
 
         BorderPane root = new BorderPane();
         root.setTop(header);

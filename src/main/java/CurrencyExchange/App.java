@@ -13,7 +13,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setMinHeight(300);
+        primaryStage.setMinHeight(350);
         primaryStage.setMinWidth(350);
         primaryStage.setTitle("Currency XChange");
 
