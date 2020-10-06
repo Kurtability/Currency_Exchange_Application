@@ -31,7 +31,9 @@ public class FileHandlerTest {
 
         String line;
         boolean secondLastLine = false;
-        tempFile.print(currencies.nextLine());
+        if(currencies.hasNextLine()) {
+            tempFile.print(currencies.nextLine());
+        }
         while(currencies.hasNextLine() && !secondLastLine) {
             line = currencies.nextLine();
             if(!currencies.hasNextLine()) {
@@ -54,7 +56,7 @@ public class FileHandlerTest {
     void findSuccess() {
         String line = null;
         line = FileHandler.find("USD");
-        assertEquals("USD,1", line, "USD found in Currencies.txt");
+        assertTrue(line.contains("USD"));
     }
 
     @Test
