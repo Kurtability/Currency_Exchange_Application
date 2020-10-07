@@ -53,7 +53,7 @@ public class AdminScene {
         tfAddCurrency.textProperty()
                 .addListener((ObservableValue<? extends String> observable, String oldValue,
                               String newValue) -> {
-                            if (!newValue.matches("[A-Za-z]?") && newValue.length() >4) {
+                            if (!newValue.matches("[A-Za-z]?") || newValue.length() >4) {
                                 tfAddCurrency.setText(oldValue);
                             }
                         }
