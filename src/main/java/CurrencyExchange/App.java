@@ -26,7 +26,7 @@ public class App extends Application {
             }
         });*/
         btn.setOnAction((event) -> { System.out.println("Hello world"); });
-        
+
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         primaryStage.setScene(new Scene(root, 640, 480));
