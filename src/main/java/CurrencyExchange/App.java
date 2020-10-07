@@ -4,32 +4,48 @@
 package CurrencyExchange;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        /*btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });*/
-        btn.setOnAction((event) -> { System.out.println("Hello world"); });
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 640, 480));
+        primaryStage.setMinHeight(350);
+        primaryStage.setMinWidth(350);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setTitle("Currency XChange");
+
+        Label label1 = new Label("Welcome to the Currency Xchange program!");
+        Button btn1 = new Button();
+        Button btn2 = new Button();
+
+        btn1.setText("Go to Currency XChange page");
+        btn1.setOnAction((event) -> {
+            System.out.println("Currency XChange");
+            primaryStage.setScene(ConvertScene.getScene());
+        });
+
+        btn2.setText("Go to Admin page");
+        btn2.setOnAction((event -> {
+           System.out.println("Admin page");
+           primaryStage.setScene(AdminScene.getScene());
+
+        }));
+
+        VBox root = new VBox(20);
+
+
+        root.getChildren().addAll(label1,btn1,btn2);
+        Scene mainPage = new Scene(root, 640, 480);
+
+        primaryStage.setScene(mainPage);
         primaryStage.show();
     }
 
