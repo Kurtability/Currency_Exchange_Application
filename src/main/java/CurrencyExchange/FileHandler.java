@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 public class FileHandler {
+
+    final static String file = "src" + File.separator + "main" + File.separator + "java" + File.separator + "CurrencyExchange" + File.separator +"currencies.txt";
+
     /*
     Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency
      */
@@ -16,7 +19,7 @@ public class FileHandler {
             Scanner currencies = null;
 
             try{
-                currencies = new Scanner(new FileInputStream("currencies.txt"));
+                currencies = new Scanner(new FileInputStream(file));
             }
             catch(FileNotFoundException e) {
                 System.out.println("currencies.txt not found or could not be opened.");
@@ -53,7 +56,7 @@ public class FileHandler {
         if(valid) {
             PrintWriter writer = null;
             try {
-                writer = new PrintWriter(new FileOutputStream("currencies.txt", true));
+                writer = new PrintWriter(new FileOutputStream(file, true));
             }
             catch(FileNotFoundException e) {
                 System.out.println("error opening currencies.txt");
@@ -74,7 +77,7 @@ public class FileHandler {
     public static void remove(String currency) {
         try {
             ArrayList<String> database = new ArrayList<String>();
-            Scanner reader = new Scanner(new File("currencies.txt"));
+            Scanner reader = new Scanner(new File(file));
             boolean found = false;
 
             while (reader.hasNextLine()) {
@@ -89,7 +92,7 @@ public class FileHandler {
             if (found == false) {
                 System.out.println("Currency could not be removed as it does not currently exist in the databse");
             } else {
-                PrintWriter writer = new PrintWriter(new File("currencies.txt"));
+                PrintWriter writer = new PrintWriter(new File(file));
                 int count = 0;
                 while (count < database.size()) {
                     writer.println(database.get(count));

@@ -10,6 +10,7 @@ import java.util.Scanner;
 import CurrencyExchange.FileHandler;
 
 public class FileHandlerTest {
+    final static String file = "src" + File.separator + "main" + File.separator + "java" + File.separator + "CurrencyExchange" + File.separator +"currencies.txt";
     ArrayList<String> result;
     /*
     Removes the last line from currencies.txt. This is to restore the file currencies.txt to its previous state when
@@ -19,7 +20,7 @@ public class FileHandlerTest {
         Scanner currencies = null;
         PrintWriter tempFile = null;
         File temp = new File("tempFile");
-        File input = new File("currencies.txt");
+        File input = new File(file);
 
         try{
             tempFile = new PrintWriter(temp);
@@ -103,9 +104,12 @@ public class FileHandlerTest {
         if(FileHandler.find("doesntExist").isEmpty()) {
             FileHandler.add("doesntExist", 1);
             result = FileHandler.find("doesntExist");
+            assertFalse(result.isEmpty());
+            removeLastLine();
         }
-        assertFalse(result.isEmpty());
-        removeLastLine();
+        else {
+            fail();
+        }
     }
 
 
@@ -113,15 +117,23 @@ public class FileHandlerTest {
     void addNegativeValue() {
         if(FileHandler.find("negativeCurrency").isEmpty()) {
             FileHandler.add("negativeCurrency", -1);
+            assertTrue(FileHandler.find("negativeCurrency").isEmpty());
         }
-        assertTrue(FileHandler.find("negativeCurrency").isEmpty());
+        else {
+            fail();
+        }
     }
 
     @Test
     void addExistingCurrency() {
-        FileHandler.add("USD", 2);
-        assertEquals(FileHandler.find("USD").size(), 2);
-        removeLastLine();
+        if(FileHandler.find("USD").size() == 1){
+            FileHandler.add("USD", 2);
+            assertEquals(FileHandler.find("USD").size(), 2);
+            removeLastLine();
+        }
+        else {
+            fail();
+        }
     }
 
     @Test
