@@ -17,7 +17,6 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-
         primaryStage.setMinHeight(350);
         primaryStage.setMinWidth(350);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
