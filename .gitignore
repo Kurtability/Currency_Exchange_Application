@@ -49,6 +49,11 @@ gradle-app.setting
 
 # VSCode
 .vscode/
+*.code-workspace
 
 # IDEA
 .idea/
+
+
+**/*/.DS_Store
+
