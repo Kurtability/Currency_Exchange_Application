@@ -3,16 +3,16 @@ import java.awt.List;
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class FileHandler {
     /*
-    If a currency is already in the file currencies.txt, it will return its name and value as a csv. Otherwise it will return null.
+    Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency
      */
-     public static String find(String currency) {
-        String result = null;
+     public static ArrayList<String> find(String currency) {
+        ArrayList<String> result = new ArrayList<>();
         if(currency != null && !currency.isEmpty()) {
             String line;
-            boolean found = false;
             Scanner currencies = null;
 
             try{
@@ -23,19 +23,20 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            while(currencies.hasNextLine() && !found) {
+            while(currencies.hasNextLine()) {
                 line = currencies.nextLine();
                 if(line.contains(currency.toUpperCase())) {
-                    found = true;
-                    result = line;
+                    result.add(line);
                 }
             }
             currencies.close();
         }
-
         return result;
     }
 
+    /*
+    Stores the currency name, its value and the date it was stored as a csv in the file currencies.txt
+     */
     public static void add(String currency, float value) {
         boolean valid = true;
 
@@ -49,11 +50,6 @@ public class FileHandler {
             valid = false;
         }
 
-        if(FileHandler.find(currency) != null) {
-            System.out.println("currency already loaded in currencies.txt");
-            valid = false;
-        }
-
         if(valid) {
             PrintWriter writer = null;
             try {
@@ -64,7 +60,7 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Float.toString(value)));
+            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Float.toString(value), LocalDateTime.now().toString()));
             writer.close();
         }
     }

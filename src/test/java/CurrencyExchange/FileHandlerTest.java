@@ -1,15 +1,16 @@
 package CurrencyExchange;
 
-import org.junit.After;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import CurrencyExchange.FileHandler;
 
 public class FileHandlerTest {
+    ArrayList<String> result;
     /*
     Removes the last line from currencies.txt. This is to restore the file currencies.txt to its previous state when
     tests modify its contents, e.g. when successfully invoking the add function.
@@ -54,66 +55,83 @@ public class FileHandlerTest {
 
     @Test
     void findSuccess() {
-        String line = null;
-        line = FileHandler.find("USD");
-        assertTrue(line.contains("USD"));
+        result = FileHandler.find("USD");
+        boolean in = true;
+        for(String s : result) {
+            if(!s.contains("USD")) {
+                in = false;
+            }
+        }
+        assertTrue(in);
+    }
+
+    @Test
+    void findMultiple() {
+        result = FileHandler.find("MYR");
+        if(result.size() == 1) {
+            FileHandler.add("MYR", 1);
+            result = FileHandler.find("MYR");
+            assertEquals(result.size(), 2);
+            removeLastLine();
+        }
+        else {
+            fail();
+        }
     }
 
     @Test
     void findWithEmptyInput() {
-        String line = null;
-        line = FileHandler.find("");
-        assertNull(line, "null input, null output");
+        result = FileHandler.find("");
+        assertTrue(result.isEmpty(), "null input, empty output");
     }
 
     @Test
     void findWithNullInput(){
         String empty = null;
-        assertNull(FileHandler.find(empty));
+        result = FileHandler.find(empty);
+        assertTrue(FileHandler.find(empty).isEmpty());
     }
 
     @Test
     void findNonExistingEntry() {
-        String line = null;
-        line = FileHandler.find("NotFound");
-        assertNull(line, "String \'NotFound\' not in currency.txt");
+        result = FileHandler.find("doesntExist");
+        assertTrue(result.isEmpty(), "String \'NotFound\' not in currency.txt");
     }
 
     @Test
     void addSuccessfully() {
-        String result = null;
-        if(FileHandler.find("doesntExist") == null) {
+        if(FileHandler.find("doesntExist").isEmpty()) {
             FileHandler.add("doesntExist", 1);
             result = FileHandler.find("doesntExist");
         }
-        assertNotNull(result);
+        assertFalse(result.isEmpty());
         removeLastLine();
     }
 
 
     @Test
     void addNegativeValue() {
-        if(FileHandler.find("negativeCurrency") == null) {
+        if(FileHandler.find("negativeCurrency").isEmpty()) {
             FileHandler.add("negativeCurrency", -1);
         }
-        assertNull(FileHandler.find("negativeCurrency"));
+        assertTrue(FileHandler.find("negativeCurrency").isEmpty());
     }
 
     @Test
     void addExistingCurrency() {
         FileHandler.add("USD", 2);
-        // method add() should prevent USD,2 from being added to currencies.txt
-        assertNotEquals("USD,2", FileHandler.find("USD"));
+        assertEquals(FileHandler.find("USD").size(), 2);
+        removeLastLine();
     }
 
     @Test
     void addNoCurrency() {
         String currency = null;
         FileHandler.add(currency, 1);
-        assertNull(FileHandler.find(currency)); // currency should not have been added to file
+        assertTrue(FileHandler.find(currency).isEmpty()); // currency should not have been added to file
         currency = "";
         FileHandler.add(currency,1);
-        assertNull(FileHandler.find(currency));
+        assertTrue(FileHandler.find(currency).isEmpty());
     }
 
     @Test
