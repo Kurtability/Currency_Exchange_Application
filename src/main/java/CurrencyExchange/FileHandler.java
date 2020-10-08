@@ -12,7 +12,7 @@ public class FileHandler {
     /*
     Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency
      */
-     public static ArrayList<String> find(String currency) {
+     public static ArrayList<String> get(String currency) {
         ArrayList<String> result = new ArrayList<>();
         if(currency != null && !currency.isEmpty()) {
             String line;
@@ -67,7 +67,29 @@ public class FileHandler {
             writer.close();
         }
     }
-    
+
+    public static ArrayList<String> getCurrencies() {
+        ArrayList<String> allCurrencies = new ArrayList<>();
+        String[] line;
+        Scanner reader = null;
+        try {
+            reader = new Scanner(new FileInputStream(file));
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("Problem opening currencies.txt");
+            System.exit(1);
+        }
+
+        while(reader.hasNextLine()) {
+            line = reader.nextLine().split(",");
+            if(!allCurrencies.contains(line[0])) {
+                allCurrencies.add(line[0]);
+            }
+        }
+        System.out.println(allCurrencies.toString());
+        return allCurrencies;
+    }
+
     // update a currencies price that is currently stored
     public static void update(String currency) {
 
