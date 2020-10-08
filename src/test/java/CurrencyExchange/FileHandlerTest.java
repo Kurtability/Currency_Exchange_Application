@@ -16,40 +16,12 @@ public class FileHandlerTest {
     Removes the last line from currencies.txt. This is to restore the file currencies.txt to its previous state when
     tests modify its contents, e.g. when successfully invoking the add function.
      */
-    private void removeLastLine() {
-        Scanner currencies = null;
-        PrintWriter tempFile = null;
-        File temp = new File("tempFile");
-        File input = new File(file);
-
-        try{
-            tempFile = new PrintWriter(temp);
-            currencies = new Scanner(input);
-        }
-        catch(FileNotFoundException e) {
-            System.out.println("Can't open files");
-            System.exit(0);
-        }
-
-        String line;
-        boolean secondLastLine = false;
-        if(currencies.hasNextLine()) {
-            tempFile.print(currencies.nextLine());
-        }
-        while(currencies.hasNextLine() && !secondLastLine) {
-            line = currencies.nextLine();
-            if(!currencies.hasNextLine()) {
-                // We've reached the second last line
-                secondLastLine = true;
-            }
-            else {
-                tempFile.print(System.lineSeparator() + line);
-            }
-        }
-        currencies.close();
-        tempFile.close();
-
-        boolean rename = temp.renameTo(input);
+    
+    @Test
+    void testRemove() {
+        String toDelete = "EUR";
+        FileHandler.remove("EUR");
+        assertTrue(FileHandler.get("EUR").isEmpty());
     }
 
     @Test
@@ -72,8 +44,8 @@ public class FileHandlerTest {
             FileHandler.add("test", 1);
             result = FileHandler.get("test");
             assertEquals(result.size(), 2);
-            removeLastLine();
-            removeLastLine();
+            FileHandler.remove("test");
+            FileHandler.remove("test");
         }
         else {
             fail();
@@ -105,7 +77,7 @@ public class FileHandlerTest {
             FileHandler.add("doesntExist", 1);
             result = FileHandler.get("doesntExist");
             assertFalse(result.isEmpty());
-            removeLastLine();
+            FileHandler.remove("doesnt");
         }
         else {
             fail();
@@ -124,17 +96,17 @@ public class FileHandlerTest {
         }
     }
 
-    @Test
+    /*@Test
     void addExistingCurrency() {
         if(FileHandler.get("USD").size() == 1){
             FileHandler.add("USD", 2);
             assertEquals(FileHandler.get("USD").size(), 2);
-            removeLastLine();
+            FileHandler.remove("USD");
         }
         else {
             fail();
         }
-    }
+    }*/
 
     @Test
     void addNoCurrency() {
