@@ -147,6 +147,11 @@ public class FileHandlerTest {
     }
 
     @Test
+    void showAllCurrencies() {
+        //TODO
+    }
+
+    @Test
     void remove() {
 
     }
