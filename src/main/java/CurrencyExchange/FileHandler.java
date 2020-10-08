@@ -68,7 +68,7 @@ public class FileHandler {
         }
     }
 
-    public static ArrayList<String> getCurrencies() {
+    public static ArrayList<String> getAllCurrencies() {
         ArrayList<String> allCurrencies = new ArrayList<>();
         String[] line;
         Scanner reader = null;
@@ -116,8 +116,12 @@ public class FileHandler {
             } else {
                 PrintWriter writer = new PrintWriter(new File(file));
                 int count = 0;
+                if(count < database.size()) {
+                    writer.print(database.get(count));
+                    count++;
+                }
                 while (count < database.size()) {
-                    writer.println(database.get(count));
+                    writer.print(System.lineSeparator() + database.get(count));
                     count++;
                 }
                 writer.close();
