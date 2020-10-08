@@ -4,7 +4,9 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import CurrencyExchange.FileHandler;
@@ -46,7 +48,6 @@ public class FileHandlerTest {
             result = FileHandler.get("TEST");
             assertEquals(result.size(), 2);
             FileHandler.remove("TEST");
-            FileHandler.remove("TEST");
         }
         else {
             fail();
@@ -85,7 +86,6 @@ public class FileHandlerTest {
         }
     }
 
-
     @Test
     void addNegativeValue() {
         if(FileHandler.get("NEGATIVECURRENCY").isEmpty()) {
@@ -97,17 +97,29 @@ public class FileHandlerTest {
         }
     }
 
-    /*@Test
-    void addExistingCurrency() {
-        if(FileHandler.get("USD").size() == 1){
-            FileHandler.add("USD", 2);
-            assertEquals(FileHandler.get("USD").size(), 2);
-            FileHandler.remove("USD");
+    @Test
+    void addSuccessfullyWithDate() {
+        if(FileHandler.get("DOESNTEXIST").isEmpty()) {
+            FileHandler.add("DOESNTEXIST", 1, LocalDateTime.now());
+            result = FileHandler.get("DOESNTEXIST");
+            assertFalse(result.isEmpty());
+            FileHandler.remove("DOESNTEXIST");
         }
         else {
             fail();
         }
-    }*/
+    }
+
+    @Test
+    void addCurrencyWithFutureDate() {
+        if(FileHandler.get("FutureDate").isEmpty()) {
+            FileHandler.add("FutureDate", 1, LocalDateTime.now().plusDays(1));
+            assertTrue(FileHandler.get("FutureDate").isEmpty());
+        }
+        else {
+            fail();
+        }
+    }
 
     @Test
     void addNoCurrency() {
@@ -121,12 +133,26 @@ public class FileHandlerTest {
 
     @Test
     void showAllCurrencies() {
-        //TODO
-    }
+        result = FileHandler.getAllCurrencies();
+        String name;
+        boolean violated = false;
+        Scanner reader = null;
 
-    @Test
-    void remove() {
+        try {
+            reader = new Scanner(new FileInputStream(file));
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Problem opening file");
+            System.exit(1);
+        }
 
+        while(reader.hasNextLine() && !violated) {
+            name = reader.nextLine().split(",")[0];
+            if(!result.contains(name)) {
+                violated = true;
+            }
+        }
+        assertFalse(violated);
     }
 
 }
