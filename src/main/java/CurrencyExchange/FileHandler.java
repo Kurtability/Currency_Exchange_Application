@@ -42,7 +42,7 @@ public class FileHandler {
     Stores the currency name, its value and the specified date as a csv in the file currencies.txt
     Format <currency name>,<currency value>,<date>
      */
-    public static void add(String currency, float value, LocalDateTime dateTime) {
+    public static void add(String currency, double value, LocalDateTime dateTime) {
         boolean valid = true;
 
         if(value <= 0) {
@@ -69,13 +69,13 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Float.toString(value), dateTime.toString()));
+            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Double.toString(value), dateTime.toString()));
             writer.close();
         }
     }
 
     // add a currency name and value with the current date.
-    public static void add(String currency, float value) {
+    public static void add(String currency, double value) {
         add(currency, value, LocalDateTime.now());
     }
 

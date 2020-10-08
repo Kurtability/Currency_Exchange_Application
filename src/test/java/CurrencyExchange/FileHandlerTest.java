@@ -75,7 +75,7 @@ public class FileHandlerTest {
     @Test
     void addSuccessfully() {
         if(FileHandler.get("DOESNTEXIST").isEmpty()) {
-            FileHandler.add("DOESNTEXIST", 1);
+            FileHandler.add("DOESNTEXIST", 1.078);
             result = FileHandler.get("DOESNTEXIST");
             assertFalse(result.isEmpty());
             FileHandler.remove("DOESNTEXIST");
