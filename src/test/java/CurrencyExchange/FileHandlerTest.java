@@ -38,14 +38,14 @@ public class FileHandlerTest {
 
     @Test
     void getMultiple() {
-        result = FileHandler.get("test");
+        result = FileHandler.get("TEST");
         if(result.isEmpty()) {
-            FileHandler.add("test", 1);
-            FileHandler.add("test", 1);
-            result = FileHandler.get("test");
+            FileHandler.add("TEST", 1);
+            FileHandler.add("TEST", 1);
+            result = FileHandler.get("TEST");
             assertEquals(result.size(), 2);
-            FileHandler.remove("test");
-            FileHandler.remove("test");
+            FileHandler.remove("TEST");
+            FileHandler.remove("TEST");
         }
         else {
             fail();
@@ -67,17 +67,17 @@ public class FileHandlerTest {
 
     @Test
     void getNonExistingEntry() {
-        result = FileHandler.get("doesntExist");
+        result = FileHandler.get("DOESNTEXIST");
         assertTrue(result.isEmpty());
     }
 
     @Test
     void addSuccessfully() {
-        if(FileHandler.get("doesntExist").isEmpty()) {
-            FileHandler.add("doesntExist", 1);
-            result = FileHandler.get("doesntExist");
+        if(FileHandler.get("DOESNTEXIST").isEmpty()) {
+            FileHandler.add("DOESNTEXIST", 1);
+            result = FileHandler.get("DOESNTEXIST");
             assertFalse(result.isEmpty());
-            FileHandler.remove("doesnt");
+            FileHandler.remove("DOESNTEXIST");
         }
         else {
             fail();
@@ -87,9 +87,9 @@ public class FileHandlerTest {
 
     @Test
     void addNegativeValue() {
-        if(FileHandler.get("negativeCurrency").isEmpty()) {
-            FileHandler.add("negativeCurrency", -1);
-            assertTrue(FileHandler.get("negativeCurrency").isEmpty());
+        if(FileHandler.get("NEGATIVECURRENCY").isEmpty()) {
+            FileHandler.add("NEGATIVECURRENCY", -1);
+            assertTrue(FileHandler.get("NEGATIVECURRENCY").isEmpty());
         }
         else {
             fail();
