@@ -19,9 +19,10 @@ public class FileHandlerTest {
     
     @Test
     void testRemove() {
-        String toDelete = "EUR";
-        FileHandler.remove("EUR");
-        assertTrue(FileHandler.get("EUR").isEmpty());
+        String toDelete = "AAA";
+        FileHandler.add("AAA", 1.4352);
+        FileHandler.remove("AAA");
+        assertTrue(FileHandler.get("AAA").isEmpty());
     }
 
     @Test
