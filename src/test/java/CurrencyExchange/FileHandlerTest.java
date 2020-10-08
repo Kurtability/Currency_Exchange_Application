@@ -52,14 +52,12 @@ public class FileHandlerTest {
         boolean rename = temp.renameTo(input);
     }
 
-
-
     @Test
-    void findSuccess() {
-        result = FileHandler.find("USD");
+    void getSuccess() {
+        result = FileHandler.get("AUD");
         boolean in = true;
         for(String s : result) {
-            if(!s.contains("USD")) {
+            if(!s.contains("AUD")) {
                 in = false;
             }
         }
@@ -67,12 +65,14 @@ public class FileHandlerTest {
     }
 
     @Test
-    void findMultiple() {
-        result = FileHandler.find("MYR");
-        if(result.size() == 1) {
-            FileHandler.add("MYR", 1);
-            result = FileHandler.find("MYR");
+    void getMultiple() {
+        result = FileHandler.get("test");
+        if(result.isEmpty()) {
+            FileHandler.add("test", 1);
+            FileHandler.add("test", 1);
+            result = FileHandler.get("test");
             assertEquals(result.size(), 2);
+            removeLastLine();
             removeLastLine();
         }
         else {
@@ -81,29 +81,29 @@ public class FileHandlerTest {
     }
 
     @Test
-    void findWithEmptyInput() {
-        result = FileHandler.find("");
-        assertTrue(result.isEmpty(), "null input, empty output");
+    void getWithEmptyInput() {
+        result = FileHandler.get("");
+        assertTrue(result.isEmpty());
     }
 
     @Test
-    void findWithNullInput(){
+    void getWithNullInput(){
         String empty = null;
-        result = FileHandler.find(empty);
-        assertTrue(FileHandler.find(empty).isEmpty());
+        result = FileHandler.get(empty);
+        assertTrue(FileHandler.get(empty).isEmpty());
     }
 
     @Test
-    void findNonExistingEntry() {
-        result = FileHandler.find("doesntExist");
-        assertTrue(result.isEmpty(), "String \'NotFound\' not in currency.txt");
+    void getNonExistingEntry() {
+        result = FileHandler.get("doesntExist");
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void addSuccessfully() {
-        if(FileHandler.find("doesntExist").isEmpty()) {
+        if(FileHandler.get("doesntExist").isEmpty()) {
             FileHandler.add("doesntExist", 1);
-            result = FileHandler.find("doesntExist");
+            result = FileHandler.get("doesntExist");
             assertFalse(result.isEmpty());
             removeLastLine();
         }
@@ -115,9 +115,9 @@ public class FileHandlerTest {
 
     @Test
     void addNegativeValue() {
-        if(FileHandler.find("negativeCurrency").isEmpty()) {
+        if(FileHandler.get("negativeCurrency").isEmpty()) {
             FileHandler.add("negativeCurrency", -1);
-            assertTrue(FileHandler.find("negativeCurrency").isEmpty());
+            assertTrue(FileHandler.get("negativeCurrency").isEmpty());
         }
         else {
             fail();
@@ -126,9 +126,9 @@ public class FileHandlerTest {
 
     @Test
     void addExistingCurrency() {
-        if(FileHandler.find("USD").size() == 1){
+        if(FileHandler.get("USD").size() == 1){
             FileHandler.add("USD", 2);
-            assertEquals(FileHandler.find("USD").size(), 2);
+            assertEquals(FileHandler.get("USD").size(), 2);
             removeLastLine();
         }
         else {
@@ -140,10 +140,10 @@ public class FileHandlerTest {
     void addNoCurrency() {
         String currency = null;
         FileHandler.add(currency, 1);
-        assertTrue(FileHandler.find(currency).isEmpty()); // currency should not have been added to file
+        assertTrue(FileHandler.get(currency).isEmpty()); // currency should not have been added to file
         currency = "";
         FileHandler.add(currency,1);
-        assertTrue(FileHandler.find(currency).isEmpty());
+        assertTrue(FileHandler.get(currency).isEmpty());
     }
 
     @Test

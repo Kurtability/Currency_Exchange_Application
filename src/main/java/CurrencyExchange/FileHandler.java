@@ -12,7 +12,7 @@ public class FileHandler {
     /*
     Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency
      */
-     public static ArrayList<String> find(String currency) {
+     public static ArrayList<String> get(String currency) {
         ArrayList<String> result = new ArrayList<>();
         if(currency != null && !currency.isEmpty()) {
             String line;
