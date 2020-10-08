@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class FileHandler {
 
-    final static String file = "src" + File.separator + "main" + File.separator + "java" + File.separator + "CurrencyExchange" + File.separator +"currencies.txt";
+    final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
 
     /*
     Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency

@@ -10,7 +10,7 @@ import java.util.Scanner;
 import CurrencyExchange.FileHandler;
 
 public class FileHandlerTest {
-    final static String file = "src" + File.separator + "main" + File.separator + "java" + File.separator + "CurrencyExchange" + File.separator +"currencies.txt";
+    final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
     ArrayList<String> result;
     /*
     Removes the last line from currencies.txt. This is to restore the file currencies.txt to its previous state when
