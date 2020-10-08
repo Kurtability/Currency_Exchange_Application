@@ -10,7 +10,8 @@ public class FileHandler {
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
 
     /*
-    Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency
+    Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency.
+    Format of the csv: <currency name>,<currency value>,<date and time>
      */
      public static ArrayList<String> get(String currency) {
         ArrayList<String> result = new ArrayList<>();
@@ -38,9 +39,10 @@ public class FileHandler {
     }
 
     /*
-    Stores the currency name, its value and the date it was stored as a csv in the file currencies.txt
+    Stores the currency name, its value and the specified date as a csv in the file currencies.txt
+    Format <currency name>,<currency value>,<date>
      */
-    public static void add(String currency, float value) {
+    public static void add(String currency, float value, LocalDateTime dateTime) {
         boolean valid = true;
 
         if(value <= 0) {
@@ -53,6 +55,10 @@ public class FileHandler {
             valid = false;
         }
 
+        if(dateTime.isAfter(LocalDateTime.now())) {
+            System.out.println("Please don't enter future dates");
+            valid = false;
+        }
         if(valid) {
             PrintWriter writer = null;
             try {
@@ -63,15 +69,22 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Float.toString(value), LocalDateTime.now().toString()));
+            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Float.toString(value), dateTime.toString()));
             writer.close();
         }
     }
 
+    // add a currency name and value with the current date.
+    public static void add(String currency, float value) {
+        add(currency, value, LocalDateTime.now());
+    }
+
+    // returns an arrayList of all currency names
     public static ArrayList<String> getAllCurrencies() {
         ArrayList<String> allCurrencies = new ArrayList<>();
         String[] line;
         Scanner reader = null;
+
         try {
             reader = new Scanner(new FileInputStream(file));
         }
