@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,6 +24,7 @@ public class App extends Application {
         Label label1 = new Label("Welcome to the Currency Xchange program!");
         Button btn1 = new Button();
         Button btn2 = new Button();
+        Button btn3 = new Button();
 
         btn1.setText("Go to Currency XChange page");
         btn1.setOnAction((event) -> {
@@ -39,10 +39,17 @@ public class App extends Application {
 
         }));
 
+        btn3.setText("Go to Popular Currencies page");
+        btn3.setOnAction((event -> {
+            System.out.println("Popular Currencies page");
+            primaryStage.setScene(PopularCurrenciesScene.getScene());
+
+        }));
+
         VBox root = new VBox(20);
 
 
-        root.getChildren().addAll(label1,btn1,btn2);
+        root.getChildren().addAll(label1,btn1,btn2,btn3);
         Scene mainPage = new Scene(root, 640, 480);
 
         primaryStage.setScene(mainPage);
