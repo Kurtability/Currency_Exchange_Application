@@ -1,15 +1,15 @@
 package CurrencyExchange;
 
-import CurrencyExchange.UIComponents.Header;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
@@ -52,6 +52,7 @@ public class ConvertScene {
                     }
                 }
             );
+
         tfFromAmount.setPromptText("From amount");
         GridPane.setConstraints(tfFromAmount, 2, 1);
 
@@ -65,7 +66,17 @@ public class ConvertScene {
         cbToCurrencies.setTooltip(new Tooltip("Select the currency to convert to"));
         GridPane.setConstraints(cbToCurrencies, 0, 4);
 
-        layout.getChildren().addAll(cbFromCurrencies, tfFromAmount, lFrom, lTo, cbToCurrencies);
+        Label result = new Label("Result");
+        GridPane.setConstraints(result, 1, 4);
+
+        Button convertButton = new Button("Convert");
+        convertButton.setOnAction(e -> {
+            System.out.println("convertButtonClicked");
+        });
+        GridPane.setConstraints(convertButton, 0, 6);
+        GridPane.setHalignment(convertButton, HPos.RIGHT);
+
+        layout.getChildren().addAll(cbFromCurrencies, tfFromAmount, lFrom, lTo, cbToCurrencies, result, convertButton);
 
         convertLayout = layout;
     }

@@ -1,11 +1,12 @@
 package CurrencyExchange;
 
-import CurrencyExchange.UIComponents.Header;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
@@ -34,7 +35,8 @@ public class AdminScene {
         btn.setOnAction((event) -> {
             System.out.println("New currency rate saved!");
         });
-        GridPane.setConstraints(btn,4,4);
+        GridPane.setConstraints(btn,2,4);
+        GridPane.setHalignment(btn, HPos.RIGHT);
 
 
         Label lFrom = new Label("Add Currency");
@@ -83,7 +85,7 @@ public class AdminScene {
         layout.getChildren().addAll(tfAddCurrency, tfAddValue, lFrom, s_lForm, addV, btn);
 
         adminLayout = layout;
-        
+
     }
 
 }
