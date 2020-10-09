@@ -1,6 +1,8 @@
 package CurrencyExchange;
-import java.awt.List;
 import java.io.*;
+import java.time.temporal.ChronoUnit;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -10,8 +12,8 @@ public class FileHandler {
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
 
     /*
-    Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of csv's of all instances of the currency.
-    Format of the csv: <currency name>,<currency value>,<date and time>
+    Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of sorted csv's of all instances of the currency.
+    Records are sorted by date in ascending order. Format of the csv: <currency name>,<currency value>,<date and time>
      */
      public static ArrayList<String> get(String currency) {
         ArrayList<String> result = new ArrayList<>();
@@ -35,8 +37,21 @@ public class FileHandler {
             }
             currencies.close();
         }
+
+        Collections.sort(result, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                String[] a1 = s1.split(",");
+                String[] a2 = s2.split(",");
+                LocalDateTime t1 = LocalDateTime.parse(a1[2]);
+                LocalDateTime t2 = LocalDateTime.parse(a2[2]);
+                return t1.compareTo(t2);
+            }
+        });
         return result;
     }
+
+
 
     /*
     Stores the currency name, its value and the specified date as a csv in the file currencies.txt
@@ -69,14 +84,14 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Double.toString(value), dateTime.toString()));
+            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Double.toString(value), dateTime.truncatedTo(ChronoUnit.SECONDS).toString()));
             writer.close();
         }
     }
 
     // add a currency name and value with the current date.
     public static void add(String currency, double value) {
-        add(currency, value, LocalDateTime.now());
+        add(currency, value, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 
     // returns an arrayList of all currency names
@@ -99,7 +114,7 @@ public class FileHandler {
                 allCurrencies.add(line[0]);
             }
         }
-        System.out.println(allCurrencies.toString());
+        reader.close();
         return allCurrencies;
     }
 

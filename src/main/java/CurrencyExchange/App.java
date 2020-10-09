@@ -3,13 +3,11 @@
  */
 package CurrencyExchange;
 
+import CurrencyExchange.UIComponents.Header;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class App extends Application {
 
@@ -18,38 +16,14 @@ public class App extends Application {
 
         primaryStage.setMinHeight(350);
         primaryStage.setMinWidth(350);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        // For rounded bottom corners
+        // primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Currency XChange");
 
-        Label label1 = new Label("Welcome to the Currency Xchange program!");
-        Button btn1 = new Button();
-        Button btn2 = new Button();
-        Button btn3 = new Button();
+        BorderPane root = new BorderPane();
+        root = new BorderPane(ConvertScene.getLayout(), Header.getHeader(), null, null, null);
+        root.setStyle("-fx-background-color: #99C24D;"); // -fx-background-radius: 0 0 20 20");
 
-        btn1.setText("Go to Currency XChange page");
-        btn1.setOnAction((event) -> {
-            System.out.println("Currency XChange");
-            primaryStage.setScene(ConvertScene.getScene());
-        });
-
-        btn2.setText("Go to Admin page");
-        btn2.setOnAction((event -> {
-           System.out.println("Admin page");
-           primaryStage.setScene(AdminScene.getScene());
-
-        }));
-
-        btn3.setText("Go to Popular Currencies page");
-        btn3.setOnAction((event -> {
-            System.out.println("Popular Currencies page");
-            primaryStage.setScene(PopularCurrenciesScene.getScene());
-
-        }));
-
-        VBox root = new VBox(20);
-
-
-        root.getChildren().addAll(label1,btn1,btn2,btn3);
         Scene mainPage = new Scene(root, 640, 480);
 
         primaryStage.setScene(mainPage);

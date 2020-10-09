@@ -1,29 +1,31 @@
 package CurrencyExchange;
 
-import CurrencyExchange.UIComponents.Header;
+import java.text.DecimalFormat;
+import java.util.List;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Region;
 
 public class ConvertScene {
 
-    static Scene convertScene;
+    static Region convertLayout;
 
-    static Scene getScene() {
-        if (convertScene == null) {
+    public static Region getLayout() {
+        if (convertLayout == null) {
             initScene();
         }
 
-        return convertScene;
+        return convertLayout;
     }
 
     private static void initScene() {
@@ -39,8 +41,7 @@ public class ConvertScene {
         GridPane.setConstraints(lFrom, 0, 0);
 
         ChoiceBox<String> cbFromCurrencies = new ChoiceBox<String>();
-        cbFromCurrencies.getItems().addAll("USD", "AUD", "SGD");
-        cbFromCurrencies.setItems(FXCollections.observableArrayList("USD", "AUD", "SGD"));
+        cbFromCurrencies.getItems().addAll(FileHandler.getAllCurrencies());
         cbFromCurrencies.setTooltip(new Tooltip("Select the currency to convert from"));
         GridPane.setConstraints(cbFromCurrencies, 0, 1);
 
@@ -53,6 +54,7 @@ public class ConvertScene {
                     }
                 }
             );
+
         tfFromAmount.setPromptText("From amount");
         GridPane.setConstraints(tfFromAmount, 2, 1);
 
@@ -62,18 +64,55 @@ public class ConvertScene {
 
         ChoiceBox<String> cbToCurrencies = new ChoiceBox<String>();
         cbToCurrencies.getItems().addAll("USD", "AUD", "SGD");
-        cbToCurrencies.setItems(FXCollections.observableArrayList("USD", "AUD", "SGD"));
+        cbToCurrencies.setItems(FXCollections.observableArrayList(FileHandler.getAllCurrencies()));
         cbToCurrencies.setTooltip(new Tooltip("Select the currency to convert to"));
         GridPane.setConstraints(cbToCurrencies, 0, 4);
 
-        layout.getChildren().addAll(cbFromCurrencies, tfFromAmount, lFrom, lTo, cbToCurrencies);
+        Label result = new Label("Result");
+        result.setMaxWidth(Double.MAX_VALUE);
+        GridPane.setFillWidth(result, true);
+        GridPane.setConstraints(result, 2, 4);
+        GridPane.setHalignment(result, HPos.RIGHT);
+        result.setStyle("-fx-font-size: 2em; -fx-padding: 5px;");
+        result.setAlignment(Pos.CENTER_RIGHT);
 
-        BorderPane root = new BorderPane();
-        root.setTop(Header.getHeader());
-        root.setCenter(layout);
-        root.setStyle("-fx-background-color: #99C24D; -fx-background-radius: 0 0 20 20");
-        convertScene = new Scene(root, 640, 480);
-        convertScene.setFill(Color.TRANSPARENT);
+        Button convertButton = new Button("Convert");
+        convertButton.setOnAction(event -> {
+
+            try {
+
+                
+                DecimalFormat df = new DecimalFormat("###.##");
+                double res = convert(cbFromCurrencies.getSelectionModel().getSelectedItem(),
+                                        cbToCurrencies.getSelectionModel().getSelectedItem(),
+                                        Double.parseDouble(tfFromAmount.getText()));
+                result.setText(
+                    df.format(res)
+                );
+
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        GridPane.setConstraints(convertButton, 0, 6);
+        GridPane.setHalignment(convertButton, HPos.RIGHT);
+
+        layout.getChildren().addAll(cbFromCurrencies, tfFromAmount, lFrom, lTo, cbToCurrencies, result, convertButton);
+
+        convertLayout = layout;
+    }
+
+    static double convert(String from, String to, double amount) {
+        
+        List<String> toChoice = FileHandler.get(to);
+        double rate = Double.parseDouble(toChoice.get(toChoice.size() - 1).split(",")[1]);
+
+        List<String> fromChoice = FileHandler.get(from);
+        rate = rate / Double.parseDouble(fromChoice.get(fromChoice.size() - 1).split(",")[1]);
+
+        return rate*amount;
     }
     
 }
