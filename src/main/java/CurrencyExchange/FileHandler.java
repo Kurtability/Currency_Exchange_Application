@@ -48,8 +48,6 @@ public class FileHandler {
                 return t1.compareTo(t2);
             }
         });
-
-        System.out.println(result.toString());
         return result;
     }
 

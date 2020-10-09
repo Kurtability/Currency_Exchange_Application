@@ -1,5 +1,6 @@
 package CurrencyExchange;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -60,7 +61,7 @@ public class TopFourTest {
             top = TopFour.getTopFour();
             if (top.contains("TEST")) {
                 TopFour.remove("test");
-                assertFalse(!top.contains("TEST"));
+                Assertions.assertTrue(top.contains("TEST"));
             }
             else
                 fail();
@@ -163,13 +164,6 @@ public class TopFourTest {
             writer.print(System.lineSeparator() + temp.get(i));
         }
         writer.close();
-    }
-
-    @Test
-    void getValues() {
-        ArrayList<ArrayList<String>> result = TopFour.getValues();
-        System.out.println(result.toString());
-        assertEquals(1,1);
     }
 
 }

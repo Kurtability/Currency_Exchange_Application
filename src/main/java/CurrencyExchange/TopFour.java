@@ -64,7 +64,8 @@ public class TopFour {
     }
 
     /*
-    Returns an arraylist of arraylists. The members of the inner list contain the history of
+    Returns an arraylist of arraylists. The members of the inner list contain the two most recent committed values of
+    each top four currency.
      */
     public static ArrayList<ArrayList<String>> getValues() {
         ArrayList<String> currencies = getTopFour();
@@ -73,8 +74,6 @@ public class TopFour {
         for(int i=0; i<currencies.size(); i++) {
             result.add(FileHandler.get(currencies.get(i)));
         }
-
-        System.out.println(result.toString());
 
         for(int i=0; i<result.size(); i++) {
             while(result.get(i).size() > 2) {
