@@ -42,14 +42,13 @@ public class FileHandlerTest {
     @Test
     void getMultiple() {
         result = FileHandler.get("TEST");
-        if(result.isEmpty()) {
+        if (result.isEmpty()) {
             FileHandler.add("TEST", 1);
             FileHandler.add("TEST", 1);
             result = FileHandler.get("TEST");
             assertEquals(result.size(), 2);
             FileHandler.remove("TEST");
-        }
-        else {
+        } else {
             fail();
         }
     }
