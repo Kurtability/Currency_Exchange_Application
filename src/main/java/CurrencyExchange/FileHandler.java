@@ -99,7 +99,7 @@ public class FileHandler {
                 allCurrencies.add(line[0]);
             }
         }
-        System.out.println(allCurrencies.toString());
+        reader.close();
         return allCurrencies;
     }
 
