@@ -2,25 +2,23 @@ package CurrencyExchange;
 
 import CurrencyExchange.UIComponents.Header;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Region;
 
 public class AdminScene {
 
-    static Scene adminScene;
+    static Region adminLayout;
 
-    static Scene getScene() {
-        if (adminScene == null) {
+    public static Region getLayout() {
+        if (adminLayout == null) {
             initScene();
         }
 
-        return adminScene;
+        return adminLayout;
     }
 
     private static void initScene() {
@@ -84,12 +82,8 @@ public class AdminScene {
 
         layout.getChildren().addAll(tfAddCurrency, tfAddValue, lFrom, s_lForm, addV, btn);
 
-        BorderPane root = new BorderPane();
-        root.setTop(Header.getHeader());
-        root.setCenter(layout);
-        root.setStyle("-fx-background-color: #99C24D; -fx-background-radius: 0 0 20 20");
-        adminScene = new Scene(root, 640, 480);
-        adminScene.setFill(Color.TRANSPARENT);
+        adminLayout = layout;
+        
     }
 
 }
