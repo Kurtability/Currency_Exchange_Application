@@ -1,5 +1,4 @@
 package CurrencyExchange;
-import java.awt.List;
 import java.io.*;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;

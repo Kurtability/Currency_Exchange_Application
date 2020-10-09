@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
-import CurrencyExchange.FileHandler;
-
 public class FileHandlerTest {
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
     ArrayList<String> result;
