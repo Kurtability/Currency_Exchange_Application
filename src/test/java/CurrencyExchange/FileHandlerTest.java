@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
-import CurrencyExchange.FileHandler;
-
 public class FileHandlerTest {
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
     ArrayList<String> result;
@@ -42,14 +40,13 @@ public class FileHandlerTest {
     @Test
     void getMultiple() {
         result = FileHandler.get("TEST");
-        if(result.isEmpty()) {
+        if (result.isEmpty()) {
             FileHandler.add("TEST", 1);
             FileHandler.add("TEST", 1);
             result = FileHandler.get("TEST");
             assertEquals(result.size(), 2);
             FileHandler.remove("TEST");
-        }
-        else {
+        } else {
             fail();
         }
     }

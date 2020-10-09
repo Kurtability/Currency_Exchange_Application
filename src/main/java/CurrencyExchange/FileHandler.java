@@ -1,6 +1,6 @@
 package CurrencyExchange;
-import java.awt.List;
 import java.io.*;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -37,19 +37,23 @@ public class FileHandler {
             }
             currencies.close();
         }
+
         Collections.sort(result, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
-                String[] arr1 = s1.split(",");
-                String[] arr2 = s2.split(",");
-                LocalDateTime t1 = LocalDateTime.parse(arr1[2]);
-                LocalDateTime t2 = LocalDateTime.parse(arr2[2]);
-                return t2.compareTo(t2);
+                String[] a1 = s1.split(",");
+                String[] a2 = s2.split(",");
+                LocalDateTime t1 = LocalDateTime.parse(a1[2]);
+                LocalDateTime t2 = LocalDateTime.parse(a2[2]);
+                return t1.compareTo(t2);
             }
         });
+
         System.out.println(result.toString());
         return result;
     }
+
+
 
     /*
     Stores the currency name, its value and the specified date as a csv in the file currencies.txt
@@ -82,14 +86,14 @@ public class FileHandler {
                 System.exit(1);
             }
 
-            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Double.toString(value), dateTime.toString()));
+            writer.print(System.lineSeparator() + String.join(",", currency.toUpperCase(), Double.toString(value), dateTime.truncatedTo(ChronoUnit.SECONDS).toString()));
             writer.close();
         }
     }
 
     // add a currency name and value with the current date.
     public static void add(String currency, double value) {
-        add(currency, value, LocalDateTime.now());
+        add(currency, value, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 
     // returns an arrayList of all currency names
