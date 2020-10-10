@@ -2,6 +2,7 @@ package CurrencyExchange.UIComponents;
 
 import CurrencyExchange.AdminScene;
 import CurrencyExchange.ConvertScene;
+import CurrencyExchange.PopularCurrenciesScene;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,35 +37,42 @@ public class Header {
 
         HBox normalButtons = new HBox(20);
         HBox adminButtons = new HBox(20);
+        //HBox topfourButtons = new HBox(20);
 
         Button btn1 = new Button();
         Button btn2 = new Button();
+        Button btn3 = new Button();
 
         btn1.setText("Convert");
         btn1.setOnAction((event) -> {
-            System.out.println("Currency XChange");
             ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(ConvertScene.getLayout(), header, null, null, null));
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
         });
 
         btn2.setText("Add");
         btn2.setOnAction((event -> {
-           System.out.println("Admin page");
            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(AdminScene.getLayout(), header, null, null, null));
            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
 
         }));
 
-        normalButtons.getChildren().addAll(btn1);
+        btn3.setText("Popular Currencies");
+        btn3.setOnAction((event -> {
+            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(PopularCurrenciesScene.getLayout(), header, null, null, null));
+            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
+
+        }));
+
+        normalButtons.getChildren().addAll(btn1,btn3);
         normalButtons.setStyle("-fx-padding: 10px 0 10px 10px");
         adminButtons.getChildren().addAll(btn2);
         adminButtons.setStyle("-fx-padding: 0 0 0 10px");
 
-        System.out.println("helllo from headerer");
         header = new VBox(label, normalButtons);
 
         // if(Authentication.isAdmin())
         header.getChildren().add(adminButtons);
+
 
         header.setStyle("-fx-background-color: #8AE4EB; -fx-padding: 12px; -fx-background-radius:0 0 25px 25px;");
         header.setAlignment(Pos.TOP_CENTER);

@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
+
 public class AdminScene {
 
     static Region adminLayout;
@@ -32,9 +33,8 @@ public class AdminScene {
 
         Button btn = new Button();
         btn.setText("SAVE");
-        btn.setOnAction((event) -> {
-            System.out.println("New currency rate saved!");
-        });
+
+
         GridPane.setConstraints(btn,2,4);
         GridPane.setHalignment(btn, HPos.RIGHT);
 
@@ -50,20 +50,18 @@ public class AdminScene {
 
 
         TextField tfAddCurrency = new TextField();
-        tfAddCurrency.textProperty()
-                .addListener((ObservableValue<? extends String> observable, String oldValue,
-                              String newValue) -> {
-                            if (!newValue.matches("[A-Za-z]?") || newValue.length() >4) {
-                                tfAddCurrency.setText(oldValue);
-                            }
-                        }
-                );
 
-        tfAddCurrency.setPromptText("Currency type");
+        tfAddCurrency.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() == 4) {
+                tfAddCurrency.setText(oldValue);
+                System.out.println(tfAddCurrency.getText());
+            }
+        });
+
+
+        
+        tfAddCurrency.setPromptText("Upper Case Only");
         GridPane.setConstraints(tfAddCurrency, 2, 2);
-
-
-
 
 
         Label addV = new Label("Add Currency Rate (In AUD)");
@@ -74,13 +72,26 @@ public class AdminScene {
         tfAddValue.textProperty()
                 .addListener((ObservableValue<? extends String> observable, String oldValue,
                               String newValue) -> {
-                            if (!newValue.matches("\\d*[.]?[0-9]?[0-9]?")) {
+                            if (!newValue.matches("\\d*[.]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?")) {
                                 tfAddValue.setText(oldValue);
                             }
                         }
                 );
         tfAddValue.setPromptText("Currency rate");
         GridPane.setConstraints(tfAddValue, 4, 2);
+
+
+        btn.setOnAction((event) -> {
+            System.out.println("New currency rate saved!");
+
+            try{
+                double a = Double.parseDouble(tfAddValue.getText());
+                FileHandler.add(tfAddCurrency.getText(), a);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        });
 
         layout.getChildren().addAll(tfAddCurrency, tfAddValue, lFrom, s_lForm, addV, btn);
 
