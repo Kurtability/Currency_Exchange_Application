@@ -75,6 +75,9 @@ public class Authentication {
             } else {
                 message.setText("Please Try Again.");
             }
+            enterUser.setText("");
+            enterPwd.setText(""); 
+            
         });
         GridPane.setConstraints(loginButton, 0, 5);
         GridPane.setHalignment(loginButton, HPos.RIGHT);
