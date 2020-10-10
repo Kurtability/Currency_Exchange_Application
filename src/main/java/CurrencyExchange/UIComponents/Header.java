@@ -26,9 +26,7 @@ public class Header {
         return header;
     }
 
-    private static void initHeader() {
-        boolean adminAccessGranted = false;
-        
+    private static void initHeader() {        
         Button close = new Button("X");
         close.setAccessibleHelp("Close the app.");
         close.setOnAction(e -> {
@@ -80,10 +78,6 @@ public class Header {
         adminButtons.setStyle("-fx-padding: 0 0 0 10px");
 
         header = new VBox(label, normalButtons);
-
-        /*if (Authentication.isAdmin()) {
-            header.getChildren().add(adminButtons);
-        }*/
 
         header.setStyle("-fx-background-color: #8AE4EB; -fx-padding: 12px; -fx-background-radius:0 0 25px 25px;");
         header.setAlignment(Pos.TOP_CENTER);
