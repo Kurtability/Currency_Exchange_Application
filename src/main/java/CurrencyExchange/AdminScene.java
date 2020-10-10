@@ -16,10 +16,7 @@ public class AdminScene {
     static Region adminLayout;
 
     public static Region getLayout() {
-        if (adminLayout == null) {
-            initScene();
-        }
-
+        initScene();
         return adminLayout;
     }
 

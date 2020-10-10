@@ -27,9 +27,7 @@ public class Authentication {
     static boolean adminAccess = false; 
     
     public static Region getLayout() {
-        if (loginLayout == null) {
-            initScene();
-        }
+        initScene();
         return loginLayout;
     }
 
