@@ -31,7 +31,7 @@ class CurrencyContainer {
     public String getRate1() {
         return rate1.get();
     }
-    public void setrate1(double rate1) { // 设置序号
+    public void setrate1(double rate1) {
         this.rate1.set(Double.toString(rate1));
     }
     public StringProperty rate1Property(){return this.rate1;
@@ -39,7 +39,7 @@ class CurrencyContainer {
     public String getrate2() {
         return rate2.get();
     }
-    public void setrate2(double rate2) { // 设置序号
+    public void setrate2(double rate2) {
         this.rate2.set(Double.toString(rate2));
     }
     public StringProperty rate2Property(){return this.rate2;
@@ -48,7 +48,7 @@ class CurrencyContainer {
     public String getrate3() {
         return rate3.get();
     }
-    public void setrate3(double rate3) { // 设置序号
+    public void setrate3(double rate3) {
         this.rate3.set(Double.toString(rate3));
     }
     public StringProperty rate3Property(){return this.rate3;
@@ -57,7 +57,7 @@ class CurrencyContainer {
     public String getrate4() {
         return rate4.get();
     }
-    public void setrate4(double rate4) { // 设置序号
+    public void setrate4(double rate4) {
         this.rate4.set(Double.toString(rate4));
     }
     public StringProperty rate4Property(){return this.rate4;

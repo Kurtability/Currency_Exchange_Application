@@ -58,7 +58,7 @@ public class Header {
 
         }));
 
-        btn3.setText("PopularCurrencies");
+        btn3.setText("Popular Currencies");
         btn3.setOnAction((event -> {
             System.out.println("Popular Currencies page");
             ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(PopularCurrenciesScene.getLayout(), header, null, null, null));
