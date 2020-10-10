@@ -157,9 +157,7 @@ public class PopularCurrenciesScene {
         currency3.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
         currency4.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
 
-        //oot.setTop(Header.getHeader());
-        //root.setCenter(vbox);
-        //root.setStyle("-fx-background-color: #99C24D; -fx-background-radius: 0 0 20 20");
+        
 
         layout.getChildren().addAll(vbox);
 
