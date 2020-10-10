@@ -12,8 +12,8 @@ public class FileHandler {
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
 
     /*
-    Returns an empty arraylist if the currency is not in the file. Otherwise returns a sorted arraylist of csv's of all instances of the currency.
-    The list is sorted by date. Format of the csv: <currency name>,<currency value>,<date and time>
+    Returns an empty arraylist if the currency is not in the file. Otherwise returns an arraylist of sorted csv's of all instances of the currency.
+    Records are sorted by date in ascending order. Format of the csv: <currency name>,<currency value>,<date and time>
      */
      public static ArrayList<String> get(String currency) {
         ArrayList<String> result = new ArrayList<>();
@@ -39,7 +39,6 @@ public class FileHandler {
         }
 
         Collections.sort(result, new Comparator<String>() {
-
             @Override
             public int compare(String s1, String s2) {
                 String[] a1 = s1.split(",");
@@ -49,8 +48,6 @@ public class FileHandler {
                 return t1.compareTo(t2);
             }
         });
-
-        System.out.println(result.toString());
         return result;
     }
 
