@@ -1,21 +1,15 @@
 package CurrencyExchange;
 
-import CurrencyExchange.UIComponents.Header;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PopularCurrenciesScene {
@@ -27,9 +21,9 @@ public class PopularCurrenciesScene {
 
 
     public static Region getLayout() {
-        if (convertLayout == null) {
+        // if (convertLayout == null) {
             initScene();
-        }
+        // }
 
         return convertLayout;
     }
@@ -57,7 +51,7 @@ public class PopularCurrenciesScene {
         List<Double> firstvalues = getTwoRecent(results.get(0));
         List<Double> secondvalues = getTwoRecent(results.get(1));
         List<Double> thirdvalues = getTwoRecent(results.get(2));
-       List<Double> fourthvalues = getTwoRecent(results.get(3));
+        List<Double> fourthvalues = getTwoRecent(results.get(3));
 
 
 
@@ -133,19 +127,19 @@ public class PopularCurrenciesScene {
 
 
         // this below is to create column to store rate and name;
-        TableColumn<CurrencyContainer,String> curs = new TableColumn("From/To");
+        TableColumn<CurrencyContainer,String> curs = new TableColumn<CurrencyContainer,String>("From/To");
         curs.setCellValueFactory(data->data.getValue().nameProperty());
 
-        TableColumn<CurrencyContainer,String> currency1 = new TableColumn(cursName.get(0));
+        TableColumn<CurrencyContainer,String> currency1 = new TableColumn<CurrencyContainer,String>(cursName.get(0));
         currency1.setCellValueFactory(data->data.getValue().rate1Property());
 
-        TableColumn<CurrencyContainer,String> currency2 = new TableColumn(cursName.get(1));
+        TableColumn<CurrencyContainer,String> currency2 = new TableColumn<CurrencyContainer,String>(cursName.get(1));
         currency2.setCellValueFactory(data->data.getValue().rate2Property());
 
-        TableColumn<CurrencyContainer,String> currency3 = new TableColumn(cursName.get(2));
+        TableColumn<CurrencyContainer,String> currency3 = new TableColumn<CurrencyContainer,String>(cursName.get(2));
         currency3.setCellValueFactory(data->data.getValue().rate3Property());
 
-        TableColumn<CurrencyContainer,String> currency4 = new TableColumn(cursName.get(3));
+        TableColumn<CurrencyContainer,String> currency4 = new TableColumn<CurrencyContainer,String>(cursName.get(3));
         currency4.setCellValueFactory(data->data.getValue().rate4Property());
 
         tableView.setItems(currencyContainers);

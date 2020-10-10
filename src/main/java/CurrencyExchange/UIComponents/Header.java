@@ -45,14 +45,12 @@ public class Header {
 
         btn1.setText("Convert");
         btn1.setOnAction((event) -> {
-            System.out.println("Currency XChange");
             ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(ConvertScene.getLayout(), header, null, null, null));
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
         });
 
         btn2.setText("Add");
         btn2.setOnAction((event -> {
-           System.out.println("Admin page");
            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(AdminScene.getLayout(), header, null, null, null));
            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
 
@@ -60,7 +58,6 @@ public class Header {
 
         btn3.setText("Popular Currencies");
         btn3.setOnAction((event -> {
-            System.out.println("Popular Currencies page");
             ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(PopularCurrenciesScene.getLayout(), header, null, null, null));
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
 
@@ -71,8 +68,6 @@ public class Header {
         adminButtons.getChildren().addAll(btn2);
         adminButtons.setStyle("-fx-padding: 0 0 0 10px");
 
-
-        System.out.println("helllo from headerer");
         header = new VBox(label, normalButtons);
 
         // if(Authentication.isAdmin())
