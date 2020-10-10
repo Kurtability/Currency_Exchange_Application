@@ -22,7 +22,7 @@ public class PopularCurrenciesScene {
     static Region convertLayout;
     private static List<String> cursName;
 
-    private static TableView<CurrencyContainer> tableView = new TableView<CurrencyContainer>();
+    private static TableView<CurrencyContainer> tableView ;
 
 
 
@@ -35,7 +35,7 @@ public class PopularCurrenciesScene {
     }
 
     private static void initScene() {
-
+        tableView = new TableView<CurrencyContainer>();
         GridPane layout = new GridPane();
         layout.setPadding(new Insets(10));
         layout.setAlignment(Pos.CENTER);
@@ -172,19 +172,19 @@ public class PopularCurrenciesScene {
 
     }
 
-    private static String getRateaAndSymbol(double pre,double now) {
+    public static String getRateaAndSymbol(double pre,double now) {
         String return_string = ((String) Double.toString(now));
         return_string = String.format("%.2f",now);
         if(pre >now){
-            return_string =  return_string + "↑";
-        }else if(pre<now){
             return_string =  return_string + "↓";
+        }else if(pre<now){
+            return_string =  return_string + "↑";
         }else{
             return_string =  return_string+ "-";
         }
         return return_string;
     }
-    private static List<Double> getTwoRecent(List<String> two){
+    static List<Double> getTwoRecent(List<String> two){
         List<Double> return_value = null;
         if(two != null){
             return_value = new ArrayList<Double>();
@@ -202,7 +202,7 @@ public class PopularCurrenciesScene {
         return  return_value;
 
     }
-    private static double getRateForRow(double row,double column){
+    public static double getRateForRow(double row, double column){
         return (1/row)*column;
 
     }
