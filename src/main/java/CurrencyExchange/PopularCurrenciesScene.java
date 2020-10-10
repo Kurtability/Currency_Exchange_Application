@@ -149,8 +149,8 @@ public class PopularCurrenciesScene {
 
 
         //BorderPane root = new BorderPane();
-        tableView.setFixedCellSize(60);//cell size should be changed
-        //tableView.prefWidthProperty().bind(convertLayout.heightProperty().multiply(0.6));
+        tableView.setFixedCellSize(55);//cell size should be changed
+        tableView.prefWidthProperty().set(400);
         curs.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
         currency1.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
         currency2.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
