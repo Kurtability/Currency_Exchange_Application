@@ -53,7 +53,7 @@ public class PopularCurrenciesScene {
         cursName = TopFour.getTopFour();
 
         ArrayList<ArrayList<String>> results = TopFour.getValues();
-        System.out.println(results.get(0));
+
         List<Double> firstvalues = getTwoRecent(results.get(0));
         List<Double> secondvalues = getTwoRecent(results.get(1));
         List<Double> thirdvalues = getTwoRecent(results.get(2));
@@ -71,9 +71,7 @@ public class PopularCurrenciesScene {
         List<Double> precur4 = new ArrayList<Double>();
         List<Double> nowcur4 = new ArrayList<Double>();
 
-        System.out.println(secondvalues);
-        System.out.println(thirdvalues);
-        System.out.println(fourthvalues);
+
         precur1.add(getRateForRow(firstvalues.get(0),secondvalues.get(0)));
         precur1.add(getRateForRow(firstvalues.get(0),thirdvalues.get(0)));
         precur1.add(getRateForRow(firstvalues.get(0),fourthvalues.get(0)));
@@ -158,13 +156,13 @@ public class PopularCurrenciesScene {
 
 
         //BorderPane root = new BorderPane();
-        tableView.setFixedCellSize(55);//cell size should be changed
+        tableView.setFixedCellSize(57);//cell size should be changed
         tableView.prefWidthProperty().set(400);
-        curs.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency1.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency2.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency3.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency4.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
+        curs.prefWidthProperty().set(80);
+        currency1.prefWidthProperty().set(82);
+        currency2.prefWidthProperty().set(82);
+        currency3.prefWidthProperty().set(82);
+        currency4.prefWidthProperty().set(82);
 
 
 
