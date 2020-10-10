@@ -4,6 +4,8 @@ import CurrencyExchange.AdminScene;
 import CurrencyExchange.ConvertScene;
 import CurrencyExchange.PopularCurrenciesScene;
 import CurrencyExchange.Authentication;
+import CurrencyExchange.updateCurrencies;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,6 +47,7 @@ public class Header {
         Button btn2 = new Button();
         Button btn3 = new Button();
         Button login = new Button();
+        Button update = new Button();
 
         btn1.setText("Convert");
         btn1.setOnAction((event) -> {
@@ -52,7 +55,7 @@ public class Header {
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
         });
 
-        btn2.setText("Add");
+        btn2.setText("Add Currency");
         btn2.setOnAction((event -> {
            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(AdminScene.getLayout(), header, null, null, null));
            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
@@ -72,9 +75,15 @@ public class Header {
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
         }));
 
+        update.setText("Update Currency");
+        update.setOnAction((event -> {
+            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(updateCurrencies.getLayout(), header, null, null, null));
+            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
+        }));
+
         normalButtons.getChildren().addAll(btn1,btn3, login);
         normalButtons.setStyle("-fx-padding: 10px 0 10px 10px");
-        adminButtons.getChildren().addAll(btn2);
+        adminButtons.getChildren().addAll(btn2, update);
         adminButtons.setStyle("-fx-padding: 0 0 0 10px");
 
         header = new VBox(label, normalButtons);
