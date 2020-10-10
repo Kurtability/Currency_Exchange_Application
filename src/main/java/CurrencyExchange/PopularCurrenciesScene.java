@@ -50,9 +50,16 @@ public class PopularCurrenciesScene {
 
         //get information
         //store name here
-        cursName = Arrays.asList(
-                "AUD","USD","HKD","JPY"
-        );
+        cursName = TopFour.getTopFour();
+
+        ArrayList<ArrayList<String>> results = TopFour.getValues();
+        System.out.println(results.get(0));
+        List<Double> firstvalues = getTwoRecent(results.get(0));
+        List<Double> secondvalues = getTwoRecent(results.get(1));
+        List<Double> thirdvalues = getTwoRecent(results.get(2));
+       List<Double> fourthvalues = getTwoRecent(results.get(3));
+
+
 
         //store exchange rate in order !!!!!!!
         List<Double> precur1 = new ArrayList<Double>();
@@ -64,35 +71,37 @@ public class PopularCurrenciesScene {
         List<Double> precur4 = new ArrayList<Double>();
         List<Double> nowcur4 = new ArrayList<Double>();
 
+        System.out.println(secondvalues);
+        System.out.println(thirdvalues);
+        System.out.println(fourthvalues);
+        precur1.add(getRateForRow(firstvalues.get(0),secondvalues.get(0)));
+        precur1.add(getRateForRow(firstvalues.get(0),thirdvalues.get(0)));
+        precur1.add(getRateForRow(firstvalues.get(0),fourthvalues.get(0)));
+        nowcur1.add(getRateForRow(firstvalues.get(1),secondvalues.get(1)));
+        nowcur1.add(getRateForRow(firstvalues.get(1),thirdvalues.get(1)));
+        nowcur1.add(getRateForRow(firstvalues.get(1),fourthvalues.get(1)));
 
-        precur1.add(1.1);
-        precur1.add(2.2);
-        precur1.add(3.3);
-        nowcur1.add(1.12);
-        nowcur1.add(2.23);
-        nowcur1.add(3.34);
 
+        precur2.add(getRateForRow(secondvalues.get(0),firstvalues.get(0)));
+        precur2.add(getRateForRow(secondvalues.get(0),thirdvalues.get(0)));
+        precur2.add(getRateForRow(secondvalues.get(0),fourthvalues.get(0)));
+        nowcur2.add(getRateForRow(secondvalues.get(1),firstvalues.get(1)));
+        nowcur2.add(getRateForRow(secondvalues.get(1),thirdvalues.get(1)));
+        nowcur2.add(getRateForRow(secondvalues.get(1),fourthvalues.get(1)));
 
-        precur2.add(1.10);
-        precur2.add(2.23);
-        precur2.add(3.34);
-        nowcur2.add(1.00);
-        nowcur2.add(9.02);
-        nowcur2.add(100.34);
+        precur3.add(getRateForRow(thirdvalues.get(0),firstvalues.get(0)));
+        precur3.add(getRateForRow(thirdvalues.get(0),secondvalues.get(0)));
+        precur3.add(getRateForRow(thirdvalues.get(0),fourthvalues.get(0)));
+        nowcur3.add(getRateForRow(thirdvalues.get(1),firstvalues.get(1)));
+        nowcur3.add(getRateForRow(thirdvalues.get(1),secondvalues.get(1)));
+        nowcur3.add(getRateForRow(thirdvalues.get(1),fourthvalues.get(1)));
 
-        precur3.add(1.10);
-        precur3.add(0.23);
-        precur3.add(7.34);
-        nowcur3.add(9.10);
-        nowcur3.add(9.02);
-        nowcur3.add(0.34);
-
-        precur4.add(1.0);
-        precur4.add(9.23);
-        precur4.add(7.74);
-        nowcur4.add(9.0);
-        nowcur4.add(55.02);
-        nowcur4.add(0.34);
+        precur4.add(getRateForRow(fourthvalues.get(0),firstvalues.get(0)));
+        precur4.add(getRateForRow(fourthvalues.get(0),secondvalues.get(0)));
+        precur4.add(getRateForRow(fourthvalues.get(0),thirdvalues.get(0)));
+        nowcur4.add(getRateForRow(fourthvalues.get(1),firstvalues.get(1)));
+        nowcur4.add(getRateForRow(fourthvalues.get(1),secondvalues.get(1)));
+        nowcur4.add(getRateForRow(fourthvalues.get(1),thirdvalues.get(1)));
 
 
         ObservableList<CurrencyContainer> currencyContainers = FXCollections.observableArrayList(
@@ -157,7 +166,7 @@ public class PopularCurrenciesScene {
         currency3.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
         currency4.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
 
-        
+
 
         layout.getChildren().addAll(vbox);
 
@@ -166,13 +175,38 @@ public class PopularCurrenciesScene {
     }
 
     private static String getRateaAndSymbol(double pre,double now) {
+        String return_string = ((String) Double.toString(now));
+        return_string = String.format("%.2f",now);
         if(pre >now){
-            return now + "↑";
+            return_string =  return_string + "↑";
         }else if(pre<now){
-            return now + "↓";
+            return_string =  return_string + "↓";
         }else{
-            return now + "-";
+            return_string =  return_string+ "-";
         }
+        return return_string;
+    }
+    private static List<Double> getTwoRecent(List<String> two){
+        List<Double> return_value = null;
+        if(two != null){
+            return_value = new ArrayList<Double>();
+            String first = two.get(0);
+            String second = two.get(1);
+
+            String[] string_first = first.split(",");
+            String[] string_second = second.split(",");
+            return_value.add(Double.parseDouble(string_first[1]));
+            return_value.add(Double.parseDouble(string_second[1]));
+
+        }
+
+
+        return  return_value;
+
+    }
+    private static double getRateForRow(double row,double column){
+        return (1/row)*column;
+
     }
 
 
