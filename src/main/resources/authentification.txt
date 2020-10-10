@@ -1,0 +1,2 @@
+username:currencyAdmin
+password:AeHd8H3nu

@@ -42,6 +42,7 @@ public class Header {
         Button btn1 = new Button();
         Button btn2 = new Button();
         Button btn3 = new Button();
+        Button login = new Button();
 
         btn1.setText("Convert");
         btn1.setOnAction((event) -> {
@@ -61,6 +62,12 @@ public class Header {
             ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(PopularCurrenciesScene.getLayout(), header, null, null, null));
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
 
+        }));
+
+        login.setText("Admin Login");
+        login.setOnAction((event -> {
+            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(Authentication.getLayout(), header, null, null, null));
+            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
         }));
 
         normalButtons.getChildren().addAll(btn1,btn3);
