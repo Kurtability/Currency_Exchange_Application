@@ -42,10 +42,10 @@ public class Authentication {
         layout.setPadding(new Insets(10));
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);
-        layout.setHgap(2);
+        layout.setHgap(10);
 
         Label adminLabel = new Label("Administration Login");
-        adminLabel.setStyle("-fx-font-size: 1.50em; -fx-text-fill: #5F634F");
+        adminLabel.setStyle("-fx-font-size: 1.50em; -fx-text-fill: #5F634F; -fx-font-weight: bold");
         GridPane.setConstraints(adminLabel, 0, 0);
 
         Label uName = new Label("Username:");
@@ -65,21 +65,22 @@ public class Authentication {
  
 
         Button loginButton = new Button("Login");
+        Label message = new Label("");
+        GridPane.setConstraints(message, 1, 5);
         loginButton.setOnAction(event -> {
             if (checkCredentials(enterUser.getText(), enterPwd.getText())) {
                 adminAccess = true;
                 Header.grantAdminAccess();
-                // display message saying login successful
-                // change the login button on header to be Logged in
+                message.setText("Login Successful!");
             } else {
-                // display message saying "Incorrect username or password, please try again or continue without admim access"
+                message.setText("Please Try Again.");
             }
         });
         GridPane.setConstraints(loginButton, 0, 5);
         GridPane.setHalignment(loginButton, HPos.RIGHT);
 
 
-        layout.getChildren().addAll(adminLabel, uName, pwd, loginButton, enterUser, enterPwd);
+        layout.getChildren().addAll(adminLabel, uName, pwd, loginButton, enterUser, enterPwd, message);
         loginLayout = layout;
     }
 
