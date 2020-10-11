@@ -1,9 +1,8 @@
 package CurrencyExchange;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.time.LocalDateTime;
 public class History {
     final static String file_rates_dates = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "topfour.txt";

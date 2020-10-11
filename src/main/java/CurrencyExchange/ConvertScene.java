@@ -104,10 +104,11 @@ public class ConvertScene {
     static double convert(String from, String to, double amount) {
         
         List<String> toChoice = FileHandler.get(to);
-        double rate = Double.parseDouble(toChoice.get(toChoice.size() - 1).split(",")[1]);
-
         List<String> fromChoice = FileHandler.get(from);
-        rate = rate / Double.parseDouble(fromChoice.get(fromChoice.size() - 1).split(",")[1]);
+
+        double rate = Double.parseDouble(fromChoice.get(fromChoice.size() - 1).split(",")[1]);
+
+        rate = rate / Double.parseDouble(toChoice.get(toChoice.size() - 1).split(",")[1]);
 
         return rate*amount;
     }
