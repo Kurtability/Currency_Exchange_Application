@@ -1,6 +1,5 @@
 package CurrencyExchange;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 // import static org.junit.Assert.assertEquals;
@@ -39,7 +38,7 @@ public class TopFourTest {
         reader.close();
         assertTrue(valid);
     }
-
+    /*
     @Test
     public void addTest() {
         ArrayList<String> top = TopFour.getTopFour();
@@ -68,7 +67,7 @@ public class TopFourTest {
         }
         else
             fail();
-    }
+    }*/
 
     @Test
     public void validateSuccess() {

@@ -1,16 +1,11 @@
 package CurrencyExchange;
 
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-
-import java.lang.reflect.Type;
-import java.text.DecimalFormat;
 
 public class ModifyPopularCurrenciesScene {
     static Region convertLayout;

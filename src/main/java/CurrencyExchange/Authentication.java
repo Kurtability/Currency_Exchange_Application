@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 import CurrencyExchange.UIComponents.Header; //UIComponents. ...
 
-
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,10 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.collections.FXCollections;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 
 public class Authentication {
     
@@ -100,7 +94,7 @@ public class Authentication {
             }
             reader.close();
 
-            if (user[1].equals(username) && pwd[1].equals(password)) {
+            if (user[1].equals(username) && Integer.parseInt(pwd[1]) == password.hashCode()) {
                 return true;
             }
 
