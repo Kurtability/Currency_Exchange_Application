@@ -86,18 +86,27 @@ public class TopFour {
         return result;
     }
 
+    /*
+    Replace all the text in topfour.txt with these four currencies.
+     */
     public static void add(String currency1, String currency2, String currency3, String currency4) {
 
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(new FileOutputStream(file, false));
+        boolean notNull = currency1 != null && currency2 != null && currency3 != null && currency4 != null;
+        if(notNull) {
+            boolean notEmpty = !currency1.isEmpty() && !currency2.isEmpty() && !currency3.isEmpty() && !currency4.isEmpty();
+            if(notEmpty) {
+                PrintWriter writer = null;
+                try {
+                    writer = new PrintWriter(new FileOutputStream(file, false));
 
-        } catch (FileNotFoundException e) {
-            System.out.println("Problems opening topfour.txt");
-            System.exit(1);
+                } catch (FileNotFoundException e) {
+                    System.out.println("Problems opening topfour.txt");
+                    System.exit(1);
+                }
+                writer.print(currency1.toUpperCase() + "\n" + currency2.toUpperCase() + "\n" + currency3.toUpperCase() + "\n" + currency4.toUpperCase());
+                writer.close();
+            }
         }
-        writer.print(currency1.toUpperCase()+"\n"+ currency2.toUpperCase()+"\n"+ currency3.toUpperCase()+"\n"+ currency4.toUpperCase());
-        writer.close();
     }
 
     public static void remove(String currency) {

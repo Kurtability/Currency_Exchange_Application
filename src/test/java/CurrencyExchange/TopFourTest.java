@@ -26,7 +26,7 @@ public class TopFourTest {
         }
 
         writer.print(oldFile.get(0));
-        for(int i = 1; i<oldFile.size(); i++) {
+        for (int i = 1; i < oldFile.size(); i++) {
             writer.print(System.lineSeparator() + oldFile.get(i));
         }
         writer.close();
@@ -50,9 +50,9 @@ public class TopFourTest {
             System.exit(1);
         }
 
-        while(reader.hasNextLine()) {
+        while (reader.hasNextLine()) {
             line = reader.nextLine();
-            if(!top.contains(line)) {
+            if (!top.contains(line)) {
                 valid = false;
             }
         }
@@ -80,7 +80,7 @@ public class TopFourTest {
             System.exit(1);
         }
 
-        while(reader.hasNextLine()) {
+        while (reader.hasNextLine()) {
             currenciesText.add(reader.nextLine());
         }
 
@@ -104,10 +104,10 @@ public class TopFourTest {
             System.exit(1);
         }
 
-        if(!currenciesText.isEmpty()) {
+        if (!currenciesText.isEmpty()) {
             writer.print(currenciesText.get(0));
         }
-        for(int i=1; i<currenciesText.size(); i++) {
+        for (int i = 1; i < currenciesText.size(); i++) {
             writer.print(System.lineSeparator() + currenciesText.get(i));
         }
         writer.close();
@@ -163,4 +163,75 @@ public class TopFourTest {
         restoreFile(temp);
     }
 
+    /*
+    Basic use case - replace all the entries in topfour.txt with new currencies. Before adding them we should make sure
+    the original text doesn't already have these strings as members.
+     */
+    @Test
+    public void addSuccess() {
+        ArrayList<String> temp = TopFour.getTopFour();
+        boolean pass = true;
+
+        String[] strings = { "S1", "S2", "S3", "S4" };
+        for(String s : strings) {
+            if(temp.contains(s)) {
+                pass = false; // These strings shouldn't be in the original topfour text
+            }
+        }
+
+        if(pass) {
+            TopFour.add(strings[0], strings[1], strings[2], strings[3]);
+            ArrayList<String> newTemp = TopFour.getTopFour();
+            for(String s : strings) {
+                if(!newTemp.contains(s)){
+                    pass = false; // These strings should be in topfour.txt now
+                }
+            }
+            if(newTemp.size() != 4) {
+                pass = false; // topfour.txt should only have 4 entries
+            }
+        }
+        restoreFile(temp);
+        assertTrue(pass);
+    }
+
+    /*
+    Add a currency that is null. The method should fail and there will be no changes to the file.
+     */
+    @Test
+    public void addFailNullEntry() {
+        ArrayList<String> temp = TopFour.getTopFour();
+        String s1 = null;
+        TopFour.add(s1, "s2", "s3", "s4");
+
+        // The topfour.txt file should be have no changes
+        boolean pass = true;
+        ArrayList<String> newTemp = TopFour.getTopFour();
+        for(String s : temp) {
+            if(!newTemp.contains(s)) {
+                pass = false;
+            }
+        }
+        assertTrue(pass);
+    }
+
+    /*
+    Add a currency that is an empty string. The method should fail and there will be no changes to the file.
+     */
+    @Test
+    public void addFailEmptyEntry() {
+        ArrayList<String> temp = TopFour.getTopFour();
+        String s1 = "";
+        TopFour.add(s1, "s2", "s3", "s4");
+
+        // The topfour.txt file should be have no changes
+        boolean pass = true;
+        ArrayList<String> newTemp = TopFour.getTopFour();
+        for(String s : temp) {
+            if(!newTemp.contains(s)) {
+                pass = false;
+            }
+        }
+        assertTrue(pass);
+    }
 }
