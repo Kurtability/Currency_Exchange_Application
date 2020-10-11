@@ -1,5 +1,5 @@
 # Currency Exchange Application
-DESCRIPTION HERE
+
 **This application needs the an installation of Java (version 11 or later) to build and run.**
 
 ## Building the application
