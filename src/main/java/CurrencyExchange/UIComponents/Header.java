@@ -6,6 +6,8 @@ import CurrencyExchange.ModifyPopularCurrenciesScene;
 import CurrencyExchange.PopularCurrenciesScene;
 import CurrencyExchange.Authentication;
 import CurrencyExchange.updateCurrencies;
+import CurrencyExchange.Summary;
+
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -50,6 +52,7 @@ public class Header {
         Button btn4 = new Button();
         Button login = new Button();
         Button update = new Button();
+        Button history = new Button();
 
         btn1.setText("Convert");
         btn1.setOnAction((event) -> {
@@ -92,7 +95,13 @@ public class Header {
             ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
         }));
 
-        normalButtons.getChildren().addAll(btn1,btn3, login);
+        history.setText("Currency History & Analytics");
+        history.setOnAction((event -> {
+            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(Summary.getLayout(), header, null, null, null));
+            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
+        }));
+
+        normalButtons.getChildren().addAll(btn1, btn3, history, login);
         normalButtons.setStyle("-fx-padding: 10px 0 10px 10px");
         adminButtons.getChildren().addAll(btn2,btn4, update);
         adminButtons.setStyle("-fx-padding: 0 0 0 10px");
