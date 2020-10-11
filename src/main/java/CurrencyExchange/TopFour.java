@@ -109,46 +109,4 @@ public class TopFour {
         }
     }
 
-    public static void remove(String currency) {
-        ArrayList<String> temp = new ArrayList<>();
-        currency = currency.toUpperCase();
-        String  line;
-
-        Scanner reader = null;
-
-        try {
-            reader = new Scanner(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
-            System.out.println("Problems opening the file topfour.txt");
-            System.exit(1);
-        }
-
-        if(reader.hasNextLine()) {
-            line = reader.nextLine();
-            if(!line.equals(currency)) {
-                temp.add(line);
-            }
-        }
-        while(reader.hasNextLine()) {
-            line = reader.nextLine();
-            if(!line.equals(currency)) {
-                temp.add(System.lineSeparator() + line);
-            }
-        }
-        reader.close();
-
-        PrintWriter writer = null;
-
-        try {
-            writer = new PrintWriter(new FileOutputStream(file));
-        } catch (FileNotFoundException e) {
-            System.out.println("Problems opening topfour.txt");
-            System.exit(1);
-        }
-
-        for(String s : temp) {
-            writer.print(s);
-        }
-        writer.close();
-    }
 }
