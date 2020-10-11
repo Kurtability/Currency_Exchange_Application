@@ -125,44 +125,42 @@ public class FileHandler {
     
     // remove a currency from the database
     public static void remove(String currency) {
-        try {
-            ArrayList<String> database = new ArrayList<String>();
-            Scanner reader = new Scanner(new File(file));
-            boolean found = false;
+        if(currency != null && !currency.isEmpty()) {
+            try {
+                ArrayList<String> database = new ArrayList<String>();
+                Scanner reader = new Scanner(new File(file));
+                boolean found = false;
 
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                if (!line.contains(currency)) {
-                    database.add(line);
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    if (!line.contains(currency)) {
+                        database.add(line);
+                    } else {
+                        found = true;
+                    }
+                }
+                reader.close();
+
+                if (found == false) {
+                    System.out.println("Currency could not be removed as it does not currently exist in the databse");
                 } else {
-                    found = true;
+                    PrintWriter writer = new PrintWriter(new File(file));
+                    int count = 0;
+                    if (count < database.size()) {
+                        writer.print(database.get(count));
+                        count++;
+                    }
+                    while (count < database.size()) {
+                        writer.print(System.lineSeparator() + database.get(count));
+                        count++;
+                    }
+                    writer.close();
                 }
-            }
-            reader.close();
 
-            if(currency.isEmpty()) {
-                found = false;
+            } catch (FileNotFoundException e) {
+                System.out.println("error opening currencies.txt");
+                System.exit(1);
             }
-
-            if (found == false) {
-                System.out.println("Currency could not be removed as it does not currently exist in the databse");
-            } else {
-                PrintWriter writer = new PrintWriter(new File(file));
-                int count = 0;
-                if(count < database.size()) {
-                    writer.print(database.get(count));
-                    count++;
-                }
-                while (count < database.size()) {
-                    writer.print(System.lineSeparator() + database.get(count));
-                    count++;
-                }
-                writer.close();
-            }
-
-        } catch(FileNotFoundException e) {
-            System.out.println("error opening currencies.txt");
-            System.exit(1);
         }
     }
 }
