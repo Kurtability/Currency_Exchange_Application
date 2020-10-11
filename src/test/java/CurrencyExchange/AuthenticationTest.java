@@ -6,10 +6,10 @@ public class AuthenticationTest {
 
     @Test
     public void test_checkCredentials(){
-        assertEquals(false, new Authentication().checkCredentials("admin","123"));
-        assertEquals(false, new Authentication().checkCredentials("",""));
-        assertEquals(false, new Authentication().checkCredentials("admin",""));
-        assertEquals(true, new Authentication().checkCredentials("admin","musk"));
+        assertEquals(false, Authentication.checkCredentials("admin","123"));
+        assertEquals(false, Authentication.checkCredentials("",""));
+        assertEquals(false, Authentication.checkCredentials("admin",""));
+        assertEquals(true, Authentication.checkCredentials("admin","musk"));
 
     }
 

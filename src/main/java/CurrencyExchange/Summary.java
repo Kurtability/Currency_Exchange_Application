@@ -1,22 +1,15 @@
 package CurrencyExchange;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.control.ChoiceBox;
-import java.io.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
+import javafx.scene.control.DatePicker;
 
 public class Summary {
     
@@ -60,7 +53,8 @@ public class Summary {
 
         TextField start = new TextField();
         start.setPromptText("YYYY-MM-DD HH:mm:ss");
-        GridPane.setConstraints(start, 5, 0);
+        DatePicker dpStart = new DatePicker();
+        GridPane.setConstraints(dpStart, 5, 0);
         
         Label tooDate = new Label("Too Date:");
         tooDate.setStyle("-fx-font-size: 1.00em; -fx-text-fill: #5F634F");
@@ -68,7 +62,8 @@ public class Summary {
 
         TextField end = new TextField();
         end.setPromptText("YYYY-MM-DD HH:mm:ss");
-        GridPane.setConstraints(end, 5, 1);
+        DatePicker dpEnd = new DatePicker();
+        GridPane.setConstraints(dpEnd, 5, 1);
 
         Label results = new Label("");
         GridPane.setConstraints(results, 0, 4);
@@ -77,18 +72,26 @@ public class Summary {
         getHistory.setOnAction(event -> {
             String curr1 = select.getSelectionModel().getSelectedItem();
             String curr2 = too.getSelectionModel().getSelectedItem();
-            if (curr1.equals(null) || curr2.equals(null)) {
+            if (curr1 == null || curr2 == null) {
                 hint.setText("Please Select Currencies");
                 start.setText("");
                 end.setText("");
             } else {
+                LocalDate startDate = dpStart.getValue();
+                LocalDate endDate = dpEnd.getValue();
+                if (startDate == null || endDate == null) {
+                    hint.setText("Select date");
+                    return;
+                }
+                if (startDate.compareTo(endDate) > 0) {
+                    hint.setText("Start date can't be after end date.");
+                    return;
+                }
+
                 try {
-                    DateTimeFormatter format= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    LocalDateTime a = LocalDateTime.parse(start.getText(), format);
-                    LocalDateTime b = LocalDateTime.parse(end.getText(), format);
-                    System.out.println(a + " " + b);
-                    System.out.println(History.history_conversion(curr1, curr2, a, b));
-                    results.setText(History.history_conversion(curr1, curr2, a, b));
+                    System.out.println(startDate + " " + endDate);
+                    System.out.println(History.history_conversion(curr1, curr2, startDate, endDate));
+                    results.setText(History.history_conversion(curr1, curr2, startDate, endDate));
                     System.out.println("fucking works");
 
                 } catch (Exception e) {
@@ -113,7 +116,7 @@ public class Summary {
         hint.setText("e.g. 2007-12-03T10:15:30");
 
         layout.gridLinesVisibleProperty();
-        layout.getChildren().addAll(results, getHistory, start, end, tooDate, fromDate, fromCurr, toCurr, select, too, hint);
+        layout.getChildren().addAll(results, getHistory, dpStart, dpEnd, tooDate, fromDate, fromCurr, toCurr, select, too, hint);
         summaryLayout = layout;
     }
 }

@@ -4,12 +4,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 public class History {
     final static String file_rates_dates = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "topfour.txt";
 
 
-    public static String history_conversion(String currency1, String currency2, LocalDateTime date_start, LocalDateTime date_end){
+    public static String history_conversion(String currency1, String currency2, LocalDate date_start, LocalDate date_end){
 
         // 1)check if both currency exists
         boolean isValid=false;
@@ -141,20 +142,27 @@ public class History {
         }
     }
     //method to get list of rates in range of the given time
-    public static ArrayList<Double> getValuesindaterange(ArrayList<String> currencyinstances, LocalDateTime date_start, LocalDateTime date_end ){
+    public static ArrayList<Double> getValuesindaterange(ArrayList<String> currencyinstances, LocalDate date_start, LocalDate date_end ){
         ArrayList<Double> result_of_dateRange = new ArrayList<>();
         DateTimeFormatter format= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         for(int y=0; y<currencyinstances.size(); y++){
             String currency_instance= currencyinstances.get(y);
             String[] currency_split= currency_instance.split(",");
             currency_split[2] =currency_split[2].replace("T", " ");
-            LocalDateTime duration=LocalDateTime.parse(currency_split[2],format);
+            LocalDateTime durationtemp=LocalDateTime.parse(currency_split[2],format);
+            LocalDate duration = LocalDate.of(durationtemp.getYear(), durationtemp.getMonthValue(), durationtemp.getDayOfMonth());
             if(duration.equals(date_start) || (duration.isAfter(date_start) && duration.isBefore(date_end) || duration.isEqual(date_end))){
                 result_of_dateRange.add(Double.parseDouble(currency_split[1]));
             }
 
         }
+        System.out.println(result_of_dateRange);
         return result_of_dateRange;
+    }
+
+    public static void main(String[] args) {
+        // history_conversion("AUD", "USD", "2020-10-10 23:23:23", "2020-10-12 23:23:23");
+        // LocalDateTime l = new LocalDateTime("");
     }
 }
 
