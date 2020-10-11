@@ -126,6 +126,7 @@ public class FileHandler {
     // remove a currency from the database
     public static void remove(String currency) {
         if(currency != null && !currency.isEmpty()) {
+            currency = currency.toUpperCase();
             try {
                 ArrayList<String> database = new ArrayList<String>();
                 Scanner reader = new Scanner(new File(file));
