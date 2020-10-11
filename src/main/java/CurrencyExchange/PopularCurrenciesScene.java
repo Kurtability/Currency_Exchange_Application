@@ -168,9 +168,9 @@ public class PopularCurrenciesScene {
         String return_string = ((String) Double.toString(now));
         return_string = String.format("%.2f",now);
         if(pre >now){
-            return_string =  return_string + "↓";
+            return_string =  return_string + "\u2193";
         }else if(pre<now){
-            return_string =  return_string + "↑";
+            return_string =  return_string + "\u2191";
         }else{
             return_string =  return_string+ "-";
         }
