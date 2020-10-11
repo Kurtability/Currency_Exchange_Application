@@ -79,7 +79,7 @@ public class Authentication {
         loginLayout = layout;
     }
 
-    private static boolean checkCredentials(String username, String password) {
+    public static boolean checkCredentials(String username, String password) {
         try {
             Scanner reader = new Scanner(new File(file));
             String[] user = null;
