@@ -26,13 +26,13 @@ public class PopularCurrenciesTest {
         double first1 = 1.00;
         double second1 = 1.02;
         String result1 = PopularCurrenciesScene.getRateaAndSymbol(first1,second1);
-        assertEquals("1.02↑",result1);
+        assertEquals("1.02\u2191",result1);
 
         //decreasing
         double first2 = 5.11;
         double second2 = 5.10;
         String result2 = PopularCurrenciesScene.getRateaAndSymbol(first2,second2);
-        assertEquals("5.10↓",result2);
+        assertEquals("5.10\u2193",result2);
 
         //increasing
         double first3 = 1.00;
