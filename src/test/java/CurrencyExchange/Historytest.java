@@ -10,10 +10,10 @@ public class Historytest {
     @Test
     void max_val_test(){
         ArrayList<Double> maxi= new ArrayList<>();
-        maxi.add(1.00);
-        maxi.add(2.00);
-        maxi.add(10.00);
-        maxi.add(8.00);
+        maxi.add(1.0);
+        maxi.add(2.0);
+        maxi.add(10.0);
+        maxi.add(8.0);
         assertEquals(History.max_val(maxi),10.0 );
     }
     @Test
@@ -32,18 +32,27 @@ public class Historytest {
         avg_test.add(2.00);
         avg_test.add(10.00);
         avg_test.add(8.00);
-        assertEquals(History.average(avg_test), 5.0 );
+        assertEquals(History.average(avg_test),5.0 );
     }
 
     @Test
-    void median_test(){
-        ArrayList<Double> med_test= new ArrayList<>();
-        med_test.add(1.00);
-        med_test.add(2.00);
-        med_test.add(10.00);
-        med_test.add(8.00);
-        assertEquals(History.median(med_test), 5 );
+    void median_test_even(){
+        ArrayList<Double> med_test_even= new ArrayList<>();
+        med_test_even.add(1.00);
+        med_test_even.add(2.00);
+        med_test_even.add(10.00);
+        med_test_even.add(8.00);
+        assertEquals(History.median(med_test_even),5.0 );
     }
+    @Test
+    void median_test_odd(){
+        ArrayList<Double> med_test_odd= new ArrayList<>();
+        med_test_odd.add(1.0);
+        med_test_odd.add(2.0);
+        med_test_odd.add(10.0);
+        assertEquals(History.median(med_test_odd),2.0 );
+    }
+
 
 
     @Test
@@ -53,7 +62,11 @@ public class Historytest {
         ssd_test.add(2.00);
         ssd_test.add(10.00);
         ssd_test.add(8.00);
-        assertEquals(3.84, Math.round(History.standarddeviation(ssd_test)*100)/100.0, History.standarddeviation(ssd_test) + " is not 2.8" );
+        assertEquals(History.standarddeviation(ssd_test),4.0 );
     }
+
+
+
+
 
 }
