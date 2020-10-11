@@ -1,13 +1,11 @@
 package CurrencyExchange;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 public class PopularCurrenciesTest {
 
@@ -15,7 +13,6 @@ public class PopularCurrenciesTest {
 
     @Test
    public void TestgetgetRateForRow(){
-        double aud =1.0;
         double usd = 0.72;
         double hkd = 5.61;
         double reslut = PopularCurrenciesScene.getRateForRow(usd,hkd);
