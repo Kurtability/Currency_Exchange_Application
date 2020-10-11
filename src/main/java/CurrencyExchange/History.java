@@ -130,7 +130,7 @@ public class History {
     public static double median(ArrayList<Double> values) {
         Collections.sort(values);
         int list_size = values.size();
-        double size_divide = list_size / 2;
+        double size_divide = list_size / 2.0;
         if (list_size % 2 == 0) {
             int sze=(int)size_divide;
             double val = (values.get(sze-1) + values.get(sze)) / 2;
