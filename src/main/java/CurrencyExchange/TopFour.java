@@ -7,7 +7,7 @@ public class TopFour {
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "topfour.txt";
 
     /*
-    Ensures the topfour.txt file has no violations.4
+    Ensures the topfour.txt file has no violations.
      */
     public static boolean validate() {
         boolean valid = true;
@@ -47,6 +47,9 @@ public class TopFour {
         return valid;
     }
 
+    /*
+    Get the names of the top four currencies and return it as an arraylist
+     */
     public static ArrayList<String> getTopFour() {
         ArrayList<String> result = new ArrayList<>();
         Scanner reader = null;
@@ -84,7 +87,6 @@ public class TopFour {
     }
 
     public static void add(String currency1, String currency2, String currency3, String currency4) {
-
 
         PrintWriter writer = null;
         try {
