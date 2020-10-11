@@ -83,15 +83,18 @@ public class TopFour {
         return result;
     }
 
-    public static void add(String currency) {
+    public static void add(String currency1, String currency2, String currency3, String currency4) {
+
+
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileOutputStream(file, true));
+            writer = new PrintWriter(new FileOutputStream(file, false));
+
         } catch (FileNotFoundException e) {
             System.out.println("Problems opening topfour.txt");
             System.exit(1);
         }
-        writer.print(System.lineSeparator() + currency.toUpperCase());
+        writer.print(currency1.toUpperCase()+"\n"+ currency2.toUpperCase()+"\n"+ currency3.toUpperCase()+"\n"+ currency4.toUpperCase());
         writer.close();
     }
 

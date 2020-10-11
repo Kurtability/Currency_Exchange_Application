@@ -2,6 +2,7 @@ package CurrencyExchange.UIComponents;
 
 import CurrencyExchange.AdminScene;
 import CurrencyExchange.ConvertScene;
+import CurrencyExchange.ModifyPopularCurrenciesScene;
 import CurrencyExchange.PopularCurrenciesScene;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -42,6 +43,7 @@ public class Header {
         Button btn1 = new Button();
         Button btn2 = new Button();
         Button btn3 = new Button();
+        Button btn4 = new Button();
 
         btn1.setText("Convert");
         btn1.setOnAction((event) -> {
@@ -52,7 +54,7 @@ public class Header {
 
         btn2.setText("Add");
         btn2.setOnAction((event -> {
-           System.out.println("Admin page");
+           System.out.println("Add Currency page");
            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(AdminScene.getLayout(), header, null, null, null));
            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
 
@@ -66,9 +68,18 @@ public class Header {
 
         }));
 
+        btn4.setText(("Modify Popular Currencies"));
+        btn4.setOnAction((event -> {
+            System.out.println("Modify Popular Currencies page");
+            ((BorderPane) header.getParent()).getScene().setRoot(new BorderPane(ModifyPopularCurrenciesScene.getLayout(), header, null, null, null));
+            ((BorderPane) header.getParent()).setStyle("-fx-background-color: #99C24D;");
+
+        }));
+
+
         normalButtons.getChildren().addAll(btn1,btn3);
         normalButtons.setStyle("-fx-padding: 10px 0 10px 10px");
-        adminButtons.getChildren().addAll(btn2);
+        adminButtons.getChildren().addAll(btn2, btn4);
         adminButtons.setStyle("-fx-padding: 0 0 0 10px");
 
 
