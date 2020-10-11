@@ -40,18 +40,23 @@ public class History {
             isValid=true;
         }
 
+        ArrayList<Double> curr1_to_curr2= new ArrayList<>();
         ArrayList<Double> values_of_Currency1=getValuesindaterange(currency1_result1,date_start, date_end);
         ArrayList<Double> values_of_Currency2=getValuesindaterange(currency2_result1,date_start, date_end);
-        double average_currency1= average(values_of_Currency1);
-        double average_currency2= average(values_of_Currency2);
-        double median_currency1=median(values_of_Currency1);
-        double median_currency2=median(values_of_Currency2);
-        double max_currency1=max_val(values_of_Currency1);
-        double max_currency2=max_val(values_of_Currency2);
-        double min_currency1=min(values_of_Currency1);
-        double min_currency2=min(values_of_Currency2);
-        double ssd_currency1=standarddeviation(values_of_Currency1);
-        double ssd_currency2=standarddeviation(values_of_Currency2);
+        for(int n=0; n<values_of_Currency1.size(); n++){
+            double rate=values_of_Currency1.get(n)/values_of_Currency2.get(n);
+            curr1_to_curr2.add(rate);
+        }
+        double average_currency1_currency2= average(curr1_to_curr2);
+        //double average_currency2= average(values_of_Currency2);
+        double median_currency1_2=median(curr1_to_curr2);
+        //double median_currency2=median(values_of_Currency2);
+        double max_currency1_2=max_val(curr1_to_curr2);
+        //double max_currency2=max_val(values_of_Currency2);
+        double min_currency1_2=min(curr1_to_curr2);
+        //double min_currency2=min(values_of_Currency2);
+        double ssd_currency1_2=standarddeviation(curr1_to_curr2);
+        //double ssd_currency2=standarddeviation(values_of_Currency2);
         String summary1= (currency1 + "average:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
         String summary2=(currency2 + "average:"+ average_currency2+" , median:"+ median_currency2+ ", maximum:"+max_currency2+", minimum:"+min_currency2+ ", standard deviation:"+ssd_currency2);
         //String summary=summary1+ summary2;
@@ -143,6 +148,8 @@ public class History {
             }
 
         }
+
+
         return result_of_dateRange;
     }
 
