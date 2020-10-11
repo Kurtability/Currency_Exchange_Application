@@ -59,15 +59,20 @@ public class History {
        // double min_currency2=min(values_of_Currency2);
         double ssd_currency1=standarddeviation(curr1_curr2);
       //  double ssd_currency2=standarddeviation(values_of_Currency2);
+
         String summary1= (currency1 +" to "+ currency2 + "average rate:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
       //  String summary2=(currency2 + "average:"+ average_currency2+" , median:"+ median_currency2+ ", maximum:"+max_currency2+", minimum:"+min_currency2+ ", standard deviation:"+ssd_currency2);
         //String summary=summary1+ summary2;
         //new String summary= String();
+        String summary2= currency1+ " to "+ currency2+ "\n";
+        for(int c=0;c<curr1_curr2.size(); c++){
+            summary2+=curr1_curr2.get(c)+"\n";
+        }
 
         //return (currency1 + "average:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
         isValid = true;
         if(isValid){
-            return summary1;
+            return summary2+summary1;
         }
         else if(currency1_exists==false || currency2_exists==false){
             return ("Currency doesnt exist");
@@ -124,7 +129,7 @@ public class History {
     public static double median(ArrayList<Double> values) {
         Collections.sort(values);
         int list_size = values.size();
-        double size_divide = list_size / 2;
+        double size_divide = list_size / 2.0;
         if (list_size % 2 == 0) {
             int sze=(int)size_divide;
             double val = (values.get(sze-1) + values.get(sze)) / 2;
