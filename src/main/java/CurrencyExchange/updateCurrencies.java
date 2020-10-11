@@ -80,5 +80,5 @@ public class updateCurrencies {
         updateLayout = layout;
     }
 
-    // error: must update all currencies
+    // error: must update all currencies?
 }

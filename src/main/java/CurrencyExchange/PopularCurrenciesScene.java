@@ -53,8 +53,6 @@ public class PopularCurrenciesScene {
         List<Double> thirdvalues = getTwoRecent(results.get(2));
         List<Double> fourthvalues = getTwoRecent(results.get(3));
 
-
-
         //store exchange rate in order !!!!!!!
         List<Double> precur1 = new ArrayList<Double>();
         List<Double> nowcur1 = new ArrayList<Double>();
@@ -170,9 +168,9 @@ public class PopularCurrenciesScene {
         String return_string = ((String) Double.toString(now));
         return_string = String.format("%.2f",now);
         if(pre >now){
-            return_string =  return_string + "↓";
+            return_string =  return_string + "  v";
         }else if(pre<now){
-            return_string =  return_string + "↑";
+            return_string =  return_string + "  ^";
         }else{
             return_string =  return_string+ "-";
         }
