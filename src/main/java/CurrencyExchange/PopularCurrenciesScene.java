@@ -1,41 +1,35 @@
 package CurrencyExchange;
 
-import CurrencyExchange.UIComponents.Header;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PopularCurrenciesScene {
     static Region convertLayout;
     private static List<String> cursName;
 
-    private static TableView<CurrencyContainer> tableView = new TableView<CurrencyContainer>();
+    private static TableView<CurrencyContainer> tableView ;
 
 
 
     public static Region getLayout() {
-        if (convertLayout == null) {
+        // if (convertLayout == null) {
             initScene();
-        }
+        // }
 
         return convertLayout;
     }
 
     private static void initScene() {
-
+        tableView = new TableView<CurrencyContainer>();
         GridPane layout = new GridPane();
         layout.setPadding(new Insets(10));
         layout.setAlignment(Pos.CENTER);
@@ -53,11 +47,11 @@ public class PopularCurrenciesScene {
         cursName = TopFour.getTopFour();
 
         ArrayList<ArrayList<String>> results = TopFour.getValues();
-        System.out.println(results.get(0));
+
         List<Double> firstvalues = getTwoRecent(results.get(0));
         List<Double> secondvalues = getTwoRecent(results.get(1));
         List<Double> thirdvalues = getTwoRecent(results.get(2));
-       List<Double> fourthvalues = getTwoRecent(results.get(3));
+        List<Double> fourthvalues = getTwoRecent(results.get(3));
 
 
 
@@ -71,9 +65,7 @@ public class PopularCurrenciesScene {
         List<Double> precur4 = new ArrayList<Double>();
         List<Double> nowcur4 = new ArrayList<Double>();
 
-        System.out.println(secondvalues);
-        System.out.println(thirdvalues);
-        System.out.println(fourthvalues);
+
         precur1.add(getRateForRow(firstvalues.get(0),secondvalues.get(0)));
         precur1.add(getRateForRow(firstvalues.get(0),thirdvalues.get(0)));
         precur1.add(getRateForRow(firstvalues.get(0),fourthvalues.get(0)));
@@ -135,19 +127,19 @@ public class PopularCurrenciesScene {
 
 
         // this below is to create column to store rate and name;
-        TableColumn<CurrencyContainer,String> curs = new TableColumn("From/To");
+        TableColumn<CurrencyContainer,String> curs = new TableColumn<CurrencyContainer,String>("From/To");
         curs.setCellValueFactory(data->data.getValue().nameProperty());
 
-        TableColumn<CurrencyContainer,String> currency1 = new TableColumn(cursName.get(0));
+        TableColumn<CurrencyContainer,String> currency1 = new TableColumn<CurrencyContainer,String>(cursName.get(0));
         currency1.setCellValueFactory(data->data.getValue().rate1Property());
 
-        TableColumn<CurrencyContainer,String> currency2 = new TableColumn(cursName.get(1));
+        TableColumn<CurrencyContainer,String> currency2 = new TableColumn<CurrencyContainer,String>(cursName.get(1));
         currency2.setCellValueFactory(data->data.getValue().rate2Property());
 
-        TableColumn<CurrencyContainer,String> currency3 = new TableColumn(cursName.get(2));
+        TableColumn<CurrencyContainer,String> currency3 = new TableColumn<CurrencyContainer,String>(cursName.get(2));
         currency3.setCellValueFactory(data->data.getValue().rate3Property());
 
-        TableColumn<CurrencyContainer,String> currency4 = new TableColumn(cursName.get(3));
+        TableColumn<CurrencyContainer,String> currency4 = new TableColumn<CurrencyContainer,String>(cursName.get(3));
         currency4.setCellValueFactory(data->data.getValue().rate4Property());
 
         tableView.setItems(currencyContainers);
@@ -158,13 +150,13 @@ public class PopularCurrenciesScene {
 
 
         //BorderPane root = new BorderPane();
-        tableView.setFixedCellSize(55);//cell size should be changed
+        tableView.setFixedCellSize(57);//cell size should be changed
         tableView.prefWidthProperty().set(400);
-        curs.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency1.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency2.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency3.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-        currency4.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
+        curs.prefWidthProperty().set(80);
+        currency1.prefWidthProperty().set(82);
+        currency2.prefWidthProperty().set(82);
+        currency3.prefWidthProperty().set(82);
+        currency4.prefWidthProperty().set(82);
 
 
 
@@ -174,19 +166,19 @@ public class PopularCurrenciesScene {
 
     }
 
-    private static String getRateaAndSymbol(double pre,double now) {
+    public static String getRateaAndSymbol(double pre,double now) {
         String return_string = ((String) Double.toString(now));
         return_string = String.format("%.2f",now);
         if(pre >now){
-            return_string =  return_string + "↑";
-        }else if(pre<now){
             return_string =  return_string + "↓";
+        }else if(pre<now){
+            return_string =  return_string + "↑";
         }else{
             return_string =  return_string+ "-";
         }
         return return_string;
     }
-    private static List<Double> getTwoRecent(List<String> two){
+    static List<Double> getTwoRecent(List<String> two){
         List<Double> return_value = null;
         if(two != null){
             return_value = new ArrayList<Double>();
@@ -204,7 +196,7 @@ public class PopularCurrenciesScene {
         return  return_value;
 
     }
-    private static double getRateForRow(double row,double column){
+    public static double getRateForRow(double row, double column){
         return (1/row)*column;
 
     }

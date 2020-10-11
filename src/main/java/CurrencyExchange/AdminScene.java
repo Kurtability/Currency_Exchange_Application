@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
@@ -17,10 +16,7 @@ public class AdminScene {
     static Region adminLayout;
 
     public static Region getLayout() {
-        if (adminLayout == null) {
-            initScene();
-        }
-
+        initScene();
         return adminLayout;
     }
 

@@ -18,7 +18,7 @@ public class App extends Application {
         primaryStage.setMinWidth(350);
         // For rounded bottom corners
         // primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Currency XChange");
+        primaryStage.setTitle("Currency Exchange");
 
         BorderPane root = new BorderPane();
         root = new BorderPane(ConvertScene.getLayout(), Header.getHeader(), null, null, null);

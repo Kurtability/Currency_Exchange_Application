@@ -21,10 +21,7 @@ public class ConvertScene {
     static Region convertLayout;
 
     public static Region getLayout() {
-        if (convertLayout == null) {
-            initScene();
-        }
-
+        initScene();
         return convertLayout;
     }
 
