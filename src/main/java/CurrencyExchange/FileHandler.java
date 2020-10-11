@@ -133,7 +133,7 @@ public class FileHandler {
 
                 while (reader.hasNextLine()) {
                     String line = reader.nextLine();
-                    if (!line.contains(currency)) {
+                    if (!line.split(",")[0].contains(currency)) {
                         database.add(line);
                     } else {
                         found = true;
