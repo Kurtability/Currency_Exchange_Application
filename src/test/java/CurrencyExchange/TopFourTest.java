@@ -14,14 +14,21 @@ import java.util.Scanner;
 public class TopFourTest {
 
     final static String file = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "topfour.txt";
+    final static String currencyText = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "currencies.txt";
 
     // method to restore topfour.txt to its previous state. It requires oldFile to contain topfour.txt's prev state.
     private void restoreFile(ArrayList<String> oldFile) {
+        restoreFile(oldFile, new File(file));
+    }
+
+
+    // method to restore a file to its previous state. It requires oldFile to contain the file's previous state.
+    private void restoreFile(ArrayList<String> oldFile, File doc){
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileOutputStream(file));
+            writer = new PrintWriter(doc);
         } catch (FileNotFoundException e) {
-            System.out.println("Problems opening file topfour.txt 2");
+            System.out.println("Problems opening file " + doc.getName());
             System.exit(1);
         }
 
@@ -31,6 +38,29 @@ public class TopFourTest {
         }
         writer.close();
     }
+
+
+    // Helper method. This stores the contents of currency.txt in memory.
+    private ArrayList<String> getCurrenciesText() {
+        ArrayList<String> result = new ArrayList<>();
+
+        Scanner reader = null;
+        try {
+            reader = new Scanner(new File(currencyText));
+        } catch (FileNotFoundException e) {
+            System.out.println("Problem opening currencies.txt");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        while (reader.hasNextLine()) {
+            result.add(reader.nextLine());
+        }
+
+        reader.close();
+        return result;
+    }
+
 
     /*
     This method should return the top four currencies. This test will check if its done its job correctly by checking whats
@@ -67,24 +97,7 @@ public class TopFourTest {
     @Test
     public void validateSuccess() {
         ArrayList<String> temp = TopFour.getTopFour();
-        ArrayList<String> currenciesText = new ArrayList<>();
-
-        String doc = "src/main/resources/currencies.txt";
-
-        Scanner reader = null;
-        try {
-            reader = new Scanner(new File(doc));
-        } catch (FileNotFoundException e) {
-            System.out.println("Problem opening currencies.txt");
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        while (reader.hasNextLine()) {
-            currenciesText.add(reader.nextLine());
-        }
-
-        reader.close();
+        ArrayList<String> currenciesText = getCurrenciesText();
 
         FileHandler.add("TEST1", 1);
         FileHandler.add("TEST2", 1);
@@ -98,7 +111,7 @@ public class TopFourTest {
         // Restore currencies.txt
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileOutputStream(doc));
+            writer = new PrintWriter(new FileOutputStream(currencyText));
         } catch (FileNotFoundException e) {
             System.out.println("Problems opening currencies.txt");
             System.exit(1);
@@ -234,4 +247,91 @@ public class TopFourTest {
         }
         assertTrue(pass);
     }
+
+    /*
+    This test makes sure that what
+     */
+    @Test
+    public void getValuesSuccess() {
+        ArrayList<String> temp = TopFour.getTopFour();
+        ArrayList<String> newTemp = getCurrenciesText();
+
+        // delete the contents of currency.txt
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(new File(currencyText));
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        writer.close();
+        String[] strs = { "ONE,1", "TWO,1", "THREE,1", "FOUR,1", "ONE,2", "TWO,2", "THREE,2", "ONE,3" };
+
+        FileHandler.add("One", 1);
+        FileHandler.add("Two", 1);
+        FileHandler.add("Three", 1);
+        FileHandler.add("Four", 1);
+
+        FileHandler.add("One", 2);
+        FileHandler.add("Two", 2);
+        FileHandler.add("Three", 2);
+        FileHandler.add("One", 3);
+
+        TopFour.add("One", "Two", "Three", "Four");
+
+        /*
+         The next line of code should output something like the following:
+         [[ONE,2.0,DATETIMEOBJECT, ONE,3.0,DATETIMEOBJECT],
+         [TWO,1.0,DATETIMEOBJECT, TWO,2.0,DATETIMEOBJECT],
+         [THREE,1.0,DATETIMEOBJECT, THREE,2.0,DATETIMEOBJECT],
+         [FOUR,1.0,DATETIMEOBJECT]]
+         */
+
+        ArrayList<ArrayList<String>> results = TopFour.getValues();
+        boolean valid = true;
+
+        ArrayList<String> al = results.get(0);
+        String entry = al.get(0);
+        if(!entry.contains("ONE,2")) {
+            valid = false;
+            System.out.println("fails at 1");
+        }
+        entry = al.get(1);
+        if(!entry.contains("ONE,3")) {
+            valid = false;
+        }
+
+        al = results.get(1);
+        entry = al.get(0);
+        if(!entry.contains("TWO,1")) {
+            valid = false;
+            System.out.println("fails at 2");
+        }
+        entry = al.get(1);
+        if(!entry.contains("TWO,2")) {
+            valid = false;
+        }
+
+        al = results.get(2);
+        entry = al.get(0);
+        if(!entry.contains("THREE,1")) {
+            valid = false;
+            System.out.println("fails at 3");
+        }
+        entry = al.get(1);
+        if(!entry.contains("THREE,2")) {
+            valid = false;
+        }
+
+        al = results.get(3);
+        entry = al.get(0);
+        if(!entry.contains("FOUR,1")) {
+            valid = false;
+        }
+
+        assertTrue(valid);
+        restoreFile(newTemp, new File(currencyText));
+        restoreFile(temp);
+    }
+
 }
