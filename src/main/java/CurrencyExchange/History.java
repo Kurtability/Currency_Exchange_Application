@@ -1,8 +1,9 @@
 package CurrencyExchange;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 public class History {
     final static String file_rates_dates = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "topfour.txt";
@@ -39,32 +40,32 @@ public class History {
         if(end_time_exists==true && start_time_exists==true && currency1_exists==true && currency2_exists==true){
             isValid=true;
         }
+        ArrayList<Double> curr1_curr2=new ArrayList<>();
 
-        ArrayList<Double> curr1_to_curr2= new ArrayList<>();
         ArrayList<Double> values_of_Currency1=getValuesindaterange(currency1_result1,date_start, date_end);
         ArrayList<Double> values_of_Currency2=getValuesindaterange(currency2_result1,date_start, date_end);
         for(int n=0; n<values_of_Currency1.size(); n++){
-            double rate=values_of_Currency1.get(n)/values_of_Currency2.get(n);
-            curr1_to_curr2.add(rate);
+            double rate=values_of_Currency1.get(n)/values_of_Currency1.get(n);
+            curr1_curr2.add(rate);
         }
-        double average_currency1_currency2= average(curr1_to_curr2);
-        //double average_currency2= average(values_of_Currency2);
-        double median_currency1_2=median(curr1_to_curr2);
-        //double median_currency2=median(values_of_Currency2);
-        double max_currency1_2=max_val(curr1_to_curr2);
-        //double max_currency2=max_val(values_of_Currency2);
-        double min_currency1_2=min(curr1_to_curr2);
-        //double min_currency2=min(values_of_Currency2);
-        double ssd_currency1_2=standarddeviation(curr1_to_curr2);
-        //double ssd_currency2=standarddeviation(values_of_Currency2);
-        String summary1= (currency1 + "average:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
-        String summary2=(currency2 + "average:"+ average_currency2+" , median:"+ median_currency2+ ", maximum:"+max_currency2+", minimum:"+min_currency2+ ", standard deviation:"+ssd_currency2);
+        double average_currency1= average(curr1_curr2);
+       // double average_currency2= average(values_of_Currency2);
+        double median_currency1=median(curr1_curr2);
+       // double median_currency2=median(values_of_Currency2);
+        double max_currency1=max_val(curr1_curr2);
+       // double max_currency2=max_val(values_of_Currency2);
+        double min_currency1=min(curr1_curr2);
+       // double min_currency2=min(values_of_Currency2);
+        double ssd_currency1=standarddeviation(curr1_curr2);
+      //  double ssd_currency2=standarddeviation(values_of_Currency2);
+        String summary1= (currency1 +" to "+ currency2 + "average rate:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
+      //  String summary2=(currency2 + "average:"+ average_currency2+" , median:"+ median_currency2+ ", maximum:"+max_currency2+", minimum:"+min_currency2+ ", standard deviation:"+ssd_currency2);
         //String summary=summary1+ summary2;
         //new String summary= String();
 
         //return (currency1 + "average:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
         if(isValid){
-            return summary1+ summary2;
+            return summary1;
         }
         else if(currency1_exists==false || currency2_exists==false){
             return ("Currency doesnt exist");
@@ -117,7 +118,7 @@ public class History {
             num+=avg_diff;
         }
         double var=num/values.size();
-        double ssd=Math.sqrt(var);
+        double ssd=Math.round((Math.sqrt(var)));
         return ssd;
     }
 
@@ -148,8 +149,6 @@ public class History {
             }
 
         }
-
-
         return result_of_dateRange;
     }
 
