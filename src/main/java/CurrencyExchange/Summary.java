@@ -1,5 +1,7 @@
 package CurrencyExchange;
 
+import java.time.LocalDateTime;
+
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.control.ChoiceBox;
+import java.io.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class Summary {
     
@@ -62,8 +70,50 @@ public class Summary {
         end.setPromptText("YYYY-MM-DD HH:mm:ss");
         GridPane.setConstraints(end, 5, 1);
 
+        Label results = new Label("");
+        GridPane.setConstraints(results, 0, 4);
+
+        Button getHistory = new Button("summarize");
+        getHistory.setOnAction(event -> {
+            String curr1 = select.getSelectionModel().getSelectedItem();
+            String curr2 = too.getSelectionModel().getSelectedItem();
+            if (curr1.equals(null) || curr2.equals(null)) {
+                hint.setText("Please Select Currencies");
+                start.setText("");
+                end.setText("");
+            } else {
+                try {
+                    DateTimeFormatter format= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime a = LocalDateTime.parse(start.getText(), format);
+                    LocalDateTime b = LocalDateTime.parse(end.getText(), format);
+                    System.out.println(a + " " + b);
+                    System.out.println(History.history_conversion(curr1, curr2, a, b));
+                    results.setText(History.history_conversion(curr1, curr2, a, b));
+                    System.out.println("fucking works");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    hint.setText("Please enter date in valid format");
+                    start.setText("");
+                    end.setText("");
+                }
+            }
+
+            
+
+            /*String time1 = "2017-10-06 17:48:23";
+            // convert String to LocalDateTime
+            LocalDateTime localDateTime = LocalDateTime.parse(time1);
+            // parse it to a specified format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss");
+            System.out.println(localDateTime.format(formatter));*/
+            
+        });
+        GridPane.setConstraints(getHistory, 3, 3);
+        hint.setText("e.g. 2007-12-03T10:15:30");
+
         layout.gridLinesVisibleProperty();
-        layout.getChildren().addAll(start, end, tooDate, fromDate, fromCurr, toCurr, select, too, hint);
+        layout.getChildren().addAll(results, getHistory, start, end, tooDate, fromDate, fromCurr, toCurr, select, too, hint);
         summaryLayout = layout;
     }
 }

@@ -23,12 +23,13 @@ public class History {
         }
 
         //check if time is ok
-        LocalDateTime timeDate=null;
+        /*LocalDateTime timeDate=null;
         DateTimeFormatter format= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:s");
         boolean start_time_exists= false;
         boolean end_time_exists= false;
         for(int i=0; i<currency1_result1.size(); i++){
             String[] s=currency1_result1.get(i).split(",");
+            s[2] = s[2].replace("T", " ");
             timeDate=LocalDateTime.parse(s[2], format);
             if(timeDate.equals(date_start)){
                 start_time_exists=true;
@@ -39,13 +40,13 @@ public class History {
         }
         if(end_time_exists==true && start_time_exists==true && currency1_exists==true && currency2_exists==true){
             isValid=true;
-        }
+        }*/
         ArrayList<Double> curr1_curr2=new ArrayList<>();
 
         ArrayList<Double> values_of_Currency1=getValuesindaterange(currency1_result1,date_start, date_end);
         ArrayList<Double> values_of_Currency2=getValuesindaterange(currency2_result1,date_start, date_end);
         for(int n=0; n<values_of_Currency1.size(); n++){
-            double rate=values_of_Currency1.get(n)/values_of_Currency1.get(n);
+            double rate=values_of_Currency1.get(n)/values_of_Currency2.get(n);
             curr1_curr2.add(rate);
         }
         double average_currency1= average(curr1_curr2);
@@ -64,6 +65,7 @@ public class History {
         //new String summary= String();
 
         //return (currency1 + "average:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
+        isValid = true;
         if(isValid){
             return summary1;
         }
@@ -136,10 +138,11 @@ public class History {
     //method to get list of rates in range of the given time
     public static ArrayList<Double> getValuesindaterange(ArrayList<String> currencyinstances, LocalDateTime date_start, LocalDateTime date_end ){
         ArrayList<Double> result_of_dateRange = new ArrayList<>();
-        DateTimeFormatter format= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:s");
+        DateTimeFormatter format= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         for(int y=0; y<currencyinstances.size(); y++){
             String currency_instance= currencyinstances.get(y);
             String[] currency_split= currency_instance.split(",");
+            currency_split[2] =currency_split[2].replace("T", " ");
             LocalDateTime duration=LocalDateTime.parse(currency_split[2],format);
             if(duration.equals(date_start) || (duration.isAfter(date_start) && duration.isBefore(date_end) || duration.isEqual(date_end))){
                 result_of_dateRange.add(Double.parseDouble(currency_split[1]));
@@ -148,7 +151,5 @@ public class History {
         }
         return result_of_dateRange;
     }
-
-
 }
 
