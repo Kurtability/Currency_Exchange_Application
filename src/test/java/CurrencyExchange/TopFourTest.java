@@ -249,7 +249,10 @@ public class TopFourTest {
     }
 
     /*
-    This test makes sure that what
+    This method will get the most recent two values for each entry in topfour.txt. It returns an arraylist of
+    arraylist of strings. To test the correctness of this we modify currencies.txt so it contains only known values
+    with timestamps that are predictable. Because of this we know exactly what getValues() will return, and we check that
+    each entry is what is expected.
      */
     @Test
     public void getValuesSuccess() {
@@ -265,7 +268,6 @@ public class TopFourTest {
             System.exit(1);
         }
         writer.close();
-        String[] strs = { "ONE,1", "TWO,1", "THREE,1", "FOUR,1", "ONE,2", "TWO,2", "THREE,2", "ONE,3" };
 
         FileHandler.add("One", 1);
         FileHandler.add("Two", 1);
@@ -288,45 +290,24 @@ public class TopFourTest {
          */
 
         ArrayList<ArrayList<String>> results = TopFour.getValues();
+
+        // Validate all the results
+        String[] strs = { "ONE,2", "ONE,3", "TWO,1", "TWO,2", "THREE,1", "THREE,2", "FOUR,1" };
+        int counter = 0;
+
+        ArrayList<String> entry;
+        String line;
         boolean valid = true;
 
-        ArrayList<String> al = results.get(0);
-        String entry = al.get(0);
-        if(!entry.contains("ONE,2")) {
-            valid = false;
-            System.out.println("fails at 1");
-        }
-        entry = al.get(1);
-        if(!entry.contains("ONE,3")) {
-            valid = false;
-        }
-
-        al = results.get(1);
-        entry = al.get(0);
-        if(!entry.contains("TWO,1")) {
-            valid = false;
-            System.out.println("fails at 2");
-        }
-        entry = al.get(1);
-        if(!entry.contains("TWO,2")) {
-            valid = false;
-        }
-
-        al = results.get(2);
-        entry = al.get(0);
-        if(!entry.contains("THREE,1")) {
-            valid = false;
-            System.out.println("fails at 3");
-        }
-        entry = al.get(1);
-        if(!entry.contains("THREE,2")) {
-            valid = false;
-        }
-
-        al = results.get(3);
-        entry = al.get(0);
-        if(!entry.contains("FOUR,1")) {
-            valid = false;
+        for(int i=0; i<results.size(); i++) {
+            entry = results.get(i);
+            for(int j=0; j<entry.size(); j++) {
+                line = entry.get(j);
+                if(!line.contains(strs[counter])) {
+                    valid = false;
+                }
+                counter++;
+            }
         }
 
         assertTrue(valid);
