@@ -117,11 +117,6 @@ public class FileHandler {
         reader.close();
         return allCurrencies;
     }
-
-    // update a currencies price that is currently stored
-    public static void update(String currency) {
-
-    }
     
     // remove a currency from the database
     public static void remove(String currency) {
