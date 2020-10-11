@@ -67,7 +67,7 @@ public class AdminScene {
         GridPane.setConstraints(tfAddCurrency, 2, 2);
 
 
-        Label addV = new Label("Add Currency Rate (In AUD)");
+        Label addV = new Label("Add Currency Rate");
         addV.setStyle("-fx-font-size: 1.25em; -fx-text-fill: #5F634F");
         GridPane.setConstraints(addV, 4, 0);
 
