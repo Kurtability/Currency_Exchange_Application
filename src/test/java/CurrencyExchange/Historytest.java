@@ -32,7 +32,7 @@ public class Historytest {
         avg_test.add(2.00);
         avg_test.add(10.00);
         avg_test.add(8.00);
-        assertEquals(History.average(avg_test),21.0 );
+        assertEquals(History.average(avg_test), 5.0 );
     }
 
     @Test
@@ -42,7 +42,7 @@ public class Historytest {
         med_test.add(2.00);
         med_test.add(10.00);
         med_test.add(8.00);
-        assertEquals(History.median(med_test),5 );
+        assertEquals(History.median(med_test), 5 );
     }
 
 
@@ -53,11 +53,7 @@ public class Historytest {
         ssd_test.add(2.00);
         ssd_test.add(10.00);
         ssd_test.add(8.00);
-        assertEquals(History.standarddeviation(ssd_test),2.8 );
+        assertEquals(3.84, Math.round(History.standarddeviation(ssd_test)*100)/100.0, History.standarddeviation(ssd_test) + " is not 2.8" );
     }
-
-
-
-
 
 }
