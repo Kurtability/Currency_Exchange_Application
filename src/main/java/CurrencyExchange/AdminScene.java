@@ -40,14 +40,14 @@ public class AdminScene {
         lFrom.setStyle("-fx-font-size: 1.25em; -fx-text-fill: #5F634F");
         GridPane.setConstraints(lFrom, 2, 0);
 
-        Label hint1 = new Label("(What is one unit of this currency");
-        GridPane.setConstraints(hint1, 4, 1);
+        Label hint1 = new Label("Enter 3 Letter Currency Code:");
+        GridPane.setConstraints(hint1, 2, 1);
 
-        Label hint2 = new Label("in AUD?)");
-        GridPane.setConstraints(hint2, 4, 2);
+        Label hint2 = new Label("1 AUD is equal to:");
+        GridPane.setConstraints(hint2, 4, 1);
 
-        Label s_lForm = new Label("give currency --->");
-        GridPane.setConstraints(s_lForm, 1, 3);
+        Label s_lForm = new Label("Enter New Currency");
+        GridPane.setConstraints(s_lForm, 1, 2);
 
 
 
@@ -64,10 +64,10 @@ public class AdminScene {
 
         
         tfAddCurrency.setPromptText("Upper Case Only");
-        GridPane.setConstraints(tfAddCurrency, 2, 3);
+        GridPane.setConstraints(tfAddCurrency, 2, 2);
 
 
-        Label addV = new Label("Add Currency Rate (In AUD)");
+        Label addV = new Label("Add Currency Rate");
         addV.setStyle("-fx-font-size: 1.25em; -fx-text-fill: #5F634F");
         GridPane.setConstraints(addV, 4, 0);
 
@@ -81,7 +81,7 @@ public class AdminScene {
                         }
                 );
         tfAddValue.setPromptText("Currency rate");
-        GridPane.setConstraints(tfAddValue, 4, 3);
+        GridPane.setConstraints(tfAddValue, 4, 2);
 
 
         btn.setOnAction((event) -> {

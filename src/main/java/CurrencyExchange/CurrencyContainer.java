@@ -24,7 +24,9 @@ class CurrencyContainer {
     public void setName(String name){
         this.name.set(name);
     }
-    public StringProperty nameProperty(){return this.name;
+    public StringProperty nameProperty() {
+        SimpleStringProperty n = new SimpleStringProperty("1 " + getName());
+        return n;
     }
 
     public String getRate1() {

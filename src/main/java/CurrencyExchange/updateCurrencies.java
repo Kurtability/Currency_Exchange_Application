@@ -29,7 +29,7 @@ public class updateCurrencies {
         //Label title = new Label("Update a Currency in the Database");
         //GridPane.setConstraints(title, 0, 0);
 
-        Label s = new Label("Update AUD too:");
+        Label s = new Label("Update: From 1 AUD too:");
         s.setStyle("-fx-font-size: 1.00em; -fx-text-fill: #5F634F");
         GridPane.setConstraints(s, 0, 1);
 
@@ -80,5 +80,5 @@ public class updateCurrencies {
         updateLayout = layout;
     }
 
-    // error: must update all currencies
+    // error: must update all currencies?
 }

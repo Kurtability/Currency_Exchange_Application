@@ -108,7 +108,7 @@ public class ConvertScene {
 
         double rate = Double.parseDouble(fromChoice.get(fromChoice.size() - 1).split(",")[1]);
 
-        rate = rate / Double.parseDouble(toChoice.get(toChoice.size() - 1).split(",")[1]);
+        rate = Double.parseDouble(toChoice.get(toChoice.size() - 1).split(",")[1]) / rate;
 
         return rate*amount;
     }
