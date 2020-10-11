@@ -139,6 +139,11 @@ public class FileHandler {
                 }
             }
             reader.close();
+
+            if(currency.isEmpty()) {
+                found = false;
+            }
+
             if (found == false) {
                 System.out.println("Currency could not be removed as it does not currently exist in the databse");
             } else {
