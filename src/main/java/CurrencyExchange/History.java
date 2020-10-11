@@ -60,7 +60,7 @@ public class History {
         double ssd_currency1=standarddeviation(curr1_curr2);
       //  double ssd_currency2=standarddeviation(values_of_Currency2);
 
-        String summary1= (currency1 +" to "+ currency2 + "average rate:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
+        String summary1= (currency1 +" to "+ currency2 + ". Average rate:"+ average_currency1+ " , median:"+ median_currency1+ " , maximum:"+max_currency1+ ", minimum:"+min_currency1+ ", standard deviation:"+ ssd_currency1);
       //  String summary2=(currency2 + "average:"+ average_currency2+" , median:"+ median_currency2+ ", maximum:"+max_currency2+", minimum:"+min_currency2+ ", standard deviation:"+ssd_currency2);
         //String summary=summary1+ summary2;
         //new String summary= String();
