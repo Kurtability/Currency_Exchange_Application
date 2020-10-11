@@ -1,4 +1,4 @@
 AUD
-AUD
-AUD
-AUD
+USD
+EUR
+MYR
