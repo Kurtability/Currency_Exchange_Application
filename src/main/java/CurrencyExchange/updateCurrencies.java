@@ -16,6 +16,7 @@ public class updateCurrencies {
     
     public static Region getLayout() {
         initScene();
+        
         return updateLayout;
     }
     // when a currency is updated, do all currency rates have to be changed or only one
